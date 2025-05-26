@@ -1,13 +1,15 @@
 ---
 layout: article
 category: article
-subtitle: From zero to hero: Build gasless, secure token transfers with typed signatures
+subtitle: Build gasless, secure token transfers with typed signatures
 topic: Solidity
 date: 2025-05-26
 tags: solidity, eip, eip-712, permit2, evm
 ---
 
 # EIP-712 and Permit2: A Developer's Guide
+
+_Build gasless, secure token transfers with typed signatures_
 
 **Author:** Zodomo | [X](https://x.com/0xZodomo) | [Warpcast](https://farcaster.xyz/zodomo) | [GitHub](https://github.com/zodomo/) | [Blog](https://exocore.milady.zip)
 
