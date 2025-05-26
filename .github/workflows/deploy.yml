@@ -1,0 +1,40 @@
+name: Build and Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2.2
+        bundler-cache: true
+        
+    - name: Install GraphViz
+      run: sudo apt-get update && sudo apt-get install -y graphviz
+      
+    - name: Install dependencies
+      run: bundle install
+      
+    - name: Build Jekyll site
+      run: bundle exec jekyll build --destination _site
+      env:
+        JEKYLL_ENV: production
+        
+    - name: Deploy to Cloudflare Pages
+      uses: cloudflare/wrangler-action@v3
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        command: pages deploy _site --project-name=exocore
