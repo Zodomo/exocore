@@ -1,0 +1,2321 @@
+<!DOCTYPE html>
+ <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="keyword" content="solidity,, eip,, eip-712,, permit2,, evm, ">
+  <meta name="title" content="EIP-712 and Permit2: A Developer’s Guide">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+   <script src="/assets/js/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="/assets/js/sidenotes.js"></script>
+ <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>EIP-712 and Permit2: A Developer’s Guide | Exocore</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="EIP-712 and Permit2: A Developer’s Guide" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Author: Zodomo X Warpcast GitHub Blog" />
+<meta property="og:description" content="Author: Zodomo X Warpcast GitHub Blog" />
+<link rel="canonical" href="https://exocore.netlify.app/articles/eip-712-and-permit2-a-developer-s-guide" />
+<meta property="og:url" content="https://exocore.netlify.app/articles/eip-712-and-permit2-a-developer-s-guide" />
+<meta property="og:site_name" content="Exocore" />
+<meta property="og:image" content="https://exocore.netlify.app/assets/imgs/card.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-26T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://exocore.netlify.app/assets/imgs/card.png" />
+<meta property="twitter:title" content="EIP-712 and Permit2: A Developer’s Guide" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-26T04:41:00-05:00","datePublished":"2025-05-26T00:00:00-05:00","description":"Author: Zodomo X Warpcast GitHub Blog","headline":"EIP-712 and Permit2: A Developer’s Guide","image":"https://exocore.netlify.app/assets/imgs/card.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://exocore.netlify.app/articles/eip-712-and-permit2-a-developer-s-guide"},"url":"https://exocore.netlify.app/articles/eip-712-and-permit2-a-developer-s-guide"}</script>
+<!-- End Jekyll SEO tag -->
+
+ <script src="//unpkg.com/element-resize-detector/dist/element-resize-detector.min.js"></script><script src="//unpkg.com/force-graph"></script><script src="https://d3js.org/d3.v6.min.js"></script>
+</head>  
+
+<html lang="en-US">
+  <body>
+      <div class="container-lg markdown-body wrapper">
+  <div class="leftcolumn">
+<div class="sidebar-card profile">
+    <div class="profile">
+      <a href="/" | absolute_url }}">
+      <img class="profile-pic" src="/assets/imgs/pfp.png" alt="">
+      </a>
+        <a class="silent-link" href="/" | absolute_url }}">
+            <h1 class="user-name silent-link">Remilia Corporation</h1>
+        </a>
+</div>
+  <div class="sidebar-link-box profile">
+      <a href="/pages/articles">Articles</a>
+      <a href="/pages/journal">Journal</a>
+      <a href="/pages/all-wiki">Wiki</a>
+      <a href="/pages/daily">Daily</a>
+    </div>
+      <div class="sidebar-link-box profile">
+      <a href="/pages/latest">Latest Posts</a>
+      <a href="/pages/archive">Archive</a>
+      <a href="/pages/tags">Index</a>
+      <a href="/pages/scrapbook">Scrapbook</a>
+      <a href="/pages/library">Library</a>
+      <a href="/ring">Webring</a>
+
+    </div>
+  </div>
+
+    <div class="sidebar-card related">
+      <h1> Related</h1> 
+      <div class="sidebar-link-box">
+<h2><a class="silent-link" href="/pages/all-articles">Articles</a></h2>
+
+
+   
+<ul>
+
+    	
+        
+    
+		
+    
+        
+	
+    	
+        
+    
+		
+    
+        
+	
+    	
+        
+    
+		
+    
+        
+	
+    	
+        
+    
+		
+    
+        
+	
+    	
+        
+    
+		
+    
+        
+	
+    	
+        
+    
+		
+    
+        
+	
+    	
+        
+    
+		
+    
+        
+	
+    	
+        
+    
+		
+    
+        
+	
+    	
+        
+    
+		
+    
+        
+	
+
+	
+	
+	
+	<li><a href="/articles/eip-712-and-permit2-a-developer-s-guide">EIP-712 and Permit2: A Developer’s Guide</a></li>
+	
+	<li><a href="/articles/table-test">Table test</a></li>
+	
+	<li><a href="/articles/configure-exocore-for-personal-use">Configure Exocore for Personal Use</a></li>
+	
+	<li><a href="/articles/exocore-installation-instructions">Exocore Installation Instructions</a></li>
+	
+	<li><a href="/articles/underpinnings-of-the-exocore">Underpinnings of the Exocore</a></li>
+	
+		
+	</ul>
+</div>
+<div class="sidebar-link-box">
+<h2><a class="silent-link" href="/pages/all-journal">Journal</a></h2>
+
+
+
+   
+<ul>
+	
+    
+	
+	
+
+	
+
+	
+
+    
+	
+	
+
+	
+
+	
+
+    
+	
+	
+
+	
+
+	
+
+    
+	
+	
+
+	
+
+	
+
+    
+	
+	
+
+	
+
+	
+
+
+
+
+<li><a href="/journal/jade-post">Jade post</a></li>
+
+<li><a href="/journal/exocore-workflow">The Exocore Workflow</a></li>
+
+<li><a href="/journal/korean-ginseng-chicken-soup">Samgyetang Ginseng Chicken Soup (Korean Style)</a></li>
+
+<li><a href="/journal/chinese-ginseng-chicken-tonic-soup">Ginseng Chicken Tonic Soup (Chinese Style)</a></li>
+
+<li><a href="/journal/newinternet">Notes on Remilia’s New Internet</a></li>
+
+	
+</ul>
+</div>
+
+<div class="sidebar-link-box">
+<h2><a class="silent-link" href="/pages/all-wiki">Wiki Notes</a></h2>
+
+
+   
+<ul>
+	
+    
+    	
+        
+    
+		
+    
+        
+	
+    
+    	
+        
+    
+		
+    
+        
+	
+	
+	
+	
+	<li><a href="/wiki/usufruct">Usufruct</a></li>
+
+	
+	<li><a href="/wiki/l-dopa">L-Dopa</a></li>
+
+	
+		
+</ul>
+    </div>  
+    </div>  
+ <div class="sidebar-card tags">
+        <a class="silent-link" href="/pages/tags/"><h1 class="silent-link"> Tags</h1></a>
+        <div class="sidebar-link-box">
+          <a href="/pages/tags/"><p><strong>See All Tags</strong></p></a>
+        
+        <a href="/pages/tags/#solidity,">Solidity,</a>
+        
+        <a href="/pages/tags/#eip,">Eip,</a>
+        
+        <a href="/pages/tags/#eip-712,">Eip-712,</a>
+        
+        <a href="/pages/tags/#permit2,">Permit2,</a>
+        
+        <a href="/pages/tags/#evm">Evm</a>
+        
+      </div>
+  
+   </div>
+</div>
+
+<div class="midcolumn">
+  <main>
+    <div class="prev-next">
+    
+<a class="prev" href="/articles/table-test"> << Table test</a>
+
+
+</div>
+
+    <article>
+      <div class="post-info">
+        <div style="padding: 0.5em 0.5em 0em 0.5em">
+
+          
+          <div class="post-date"><strong>Created:</strong> May 26, 2025</div>
+          <div class="post-date"><strong>Modified:</strong> May 26, 2025</div>
+        </div>
+
+      <div class="title">
+      <h1 class="title-text">EIP-712 and Permit2: A Developer’s Guide</h1>
+      </div>
+        
+
+         
+<div class="content toc-container">
+    <h1 class="toc-header">Table of Contents</h1>
+
+<ol class="inline_toc" id="my_toc"><li><a href="#table-of-contents">Table of Contents</a></li><li><a href="#understanding-eip-712-making-signatures-human-readable">Understanding EIP-712: Making Signatures Human-Readable</a><ol><li><a href="#the-problem-users-signing-blind">The Problem: Users Signing Blind</a></li><li><a href="#eip-712-the-solution">EIP-712: The Solution</a></li><li><a href="#how-eip-712-works-under-the-hood">How EIP-712 Works Under the Hood</a><ol><li><a href="#1-domain-separator-your-apps-unique-fingerprint">1. Domain Separator: Your App’s Unique Fingerprint</a></li><li><a href="#2-type-hash-the-structure-definition">2. Type Hash: The Structure Definition</a></li><li><a href="#3-struct-hash-encoding-your-actual-data">3. Struct Hash: Encoding Your Actual Data</a></li><li><a href="#putting-it-all-together">Putting It All Together</a></li></ol></li><li><a href="#verifying-eip-712-signatures-in-your-contract">Verifying EIP-712 Signatures in Your Contract</a></li><li><a href="#advanced-eip-712-nested-structs">Advanced EIP-712: Nested Structs</a></li><li><a href="#advanced-eip-712-array-types">Advanced EIP-712: Array Types</a><ol><li><a href="#basic-array-types">Basic Array Types</a></li><li><a href="#arrays-of-structs-the-complex-case">Arrays of Structs: The Complex Case</a></li><li><a href="#the-array-hashing-algorithm">The Array Hashing Algorithm</a></li><li><a href="#empty-arrays-and-edge-cases">Empty Arrays and Edge Cases</a></li><li><a href="#practical-example-multi-vulnerability-payout-authorization">Practical Example: Multi-Vulnerability Payout Authorization</a></li><li><a href="#critical-rules-for-array-hashing">Critical Rules for Array Hashing</a></li><li><a href="#array-type-string-construction">Array Type String Construction</a></li><li><a href="#common-array-pitfalls">Common Array Pitfalls</a></li></ol></li><li><a href="#general-eip-712-pitfalls-and-best-practices">General EIP-712 Pitfalls and Best Practices</a></li></ol></li><li><a href="#permit2-the-ultimate-token-permission-system">Permit2: The Ultimate Token Permission System</a><ol><li><a href="#the-traditional-approval-problem">The Traditional Approval Problem</a></li><li><a href="#what-is-permit2">What is Permit2?</a></li><li><a href="#permit2s-dual-architecture">Permit2’s Dual Architecture</a><ol><li><a href="#system-comparison-at-a-glance">System Comparison at a Glance</a></li></ol></li><li><a href="#allowancetransfer-enhanced-traditional-approvals">AllowanceTransfer: Enhanced Traditional Approvals</a><ol><li><a href="#core-data-structures">Core Data Structures</a></li><li><a href="#how-allowancetransfer-works">How AllowanceTransfer Works</a></li><li><a href="#allowancetransfer-eip-712-implementation">AllowanceTransfer EIP-712 Implementation</a></li><li><a href="#using-allowancetransfer-in-your-bug-bounty-contract">Using AllowanceTransfer in Your Bug Bounty Contract</a></li><li><a href="#ordered-nonce-management-in-allowancetransfer">Ordered Nonce Management in AllowanceTransfer</a></li></ol></li><li><a href="#signaturetransfer-direct-one-time-transfers">SignatureTransfer: Direct One-Time Transfers</a><ol><li><a href="#core-data-structures-1">Core Data Structures</a></li><li><a href="#how-signaturetransfer-works">How SignatureTransfer Works</a></li><li><a href="#signaturetransfer-eip-712-implementation">SignatureTransfer EIP-712 Implementation</a></li><li><a href="#unordered-nonce-management-in-signaturetransfer">Unordered Nonce Management in SignatureTransfer</a></li></ol></li><li><a href="#batch-operations-maximum-efficiency">Batch Operations: Maximum Efficiency</a><ol><li><a href="#allowancetransfer-batch">AllowanceTransfer Batch</a></li><li><a href="#signaturetransfer-batch">SignatureTransfer Batch</a></li></ol></li><li><a href="#permit2s-eip-712-domain-setup">Permit2’s EIP-712 Domain Setup</a></li><li><a href="#security-considerations-and-error-handling">Security Considerations and Error Handling</a><ol><li><a href="#time-based-protections">Time-based Protections</a></li><li><a href="#amount-validations">Amount Validations</a></li><li><a href="#nonce-based-replay-protection">Nonce-based Replay Protection</a></li></ol></li><li><a href="#emergency-features">Emergency Features</a></li><li><a href="#gas-efficiency-benefits">Gas Efficiency Benefits</a><ol><li><a href="#traditional-approach-vs-permit2">Traditional Approach vs Permit2</a></li><li><a href="#permit2-approach">Permit2 Approach</a></li><li><a href="#batch-operations-provide-maximum-efficiency">Batch Operations Provide Maximum Efficiency</a></li></ol></li><li><a href="#integration-example-complete-bug-bounty-flow">Integration Example: Complete Bug Bounty Flow</a></li><li><a href="#choosing-between-allowancetransfer-and-signaturetransfer">Choosing Between AllowanceTransfer and SignatureTransfer</a></li><li><a href="#best-practices-for-bug-bounty-platforms">Best Practices for Bug Bounty Platforms</a></li></ol></li><li><a href="#permit2-witness-transfers-adding-custom-logic">Permit2 Witness Transfers: Adding Custom Logic</a><ol><li><a href="#what-are-witness-transfers">What are Witness Transfers?</a></li><li><a href="#the-problem-witness-transfers-solve">The Problem Witness Transfers Solve</a></li><li><a href="#witness-transfer-fundamentals">Witness Transfer Fundamentals</a></li><li><a href="#basic-witness-implementation-vulnerability-verification">Basic Witness Implementation: Vulnerability Verification</a></li><li><a href="#witness-type-string-the-critical-component">Witness Type String: The Critical Component</a></li><li><a href="#advanced-witness-nested-structs">Advanced Witness: Nested Structs</a></li><li><a href="#dynamic-data-witness-including-custom-instructions">Dynamic Data Witness: Including Custom Instructions</a></li><li><a href="#array-witness-batch-vulnerability-processing">Array Witness: Batch Vulnerability Processing</a></li><li><a href="#complete-signature-generation-for-witnesses">Complete Signature Generation for Witnesses</a></li><li><a href="#witness-vs-non-witness-when-to-use-each">Witness vs Non-Witness: When to Use Each</a></li><li><a href="#security-considerations-for-witness-transfers">Security Considerations for Witness Transfers</a></li><li><a href="#advanced-patterns-conditional-logic">Advanced Patterns: Conditional Logic</a></li><li><a href="#best-practices-for-witness-transfers">Best Practices for Witness Transfers</a></li></ol></li><li><a href="#conclusion">Conclusion</a><ol><li><a href="#what-youve-learned">What You’ve Learned</a></li><li><a href="#the-bug-bounty-platform-a-complete-example">The Bug Bounty Platform: A Complete Example</a></li><li><a href="#key-architectural-decisions">Key Architectural Decisions</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#resources-for-continued-learning">Resources for Continued Learning</a></li><li><a href="#final-thoughts">Final Thoughts</a></li></ol></li></ol></div>
+
+
+        </div>
+        <hr>
+
+      <div class="notes-entry-container note">
+        <div class="content post-content">
+
+          <table>
+  <tbody>
+    <tr>
+      <td>
+<strong>Author:</strong> Zodomo</td>
+      <td><a href="https://x.com/0xZodomo" class="web-link">X</a></td>
+      <td><a href="https://farcaster.xyz/zodomo" class="web-link">Warpcast</a></td>
+      <td><a href="https://github.com/zodomo/" class="web-link">GitHub</a></td>
+      <td><a href="https://exocore.milady.zip" class="web-link">Blog</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>From zero to hero: Build gasless, secure token transfers with typed signatures</em></p>
+
+<p>I needed to utilize permit2’s witness functionality in Omni SolverNet to add gasless orders. Some of the data structures I had to use were extremely complex. When researching EIP-712 and permit2, I found that documentation for both was rather lacking. EIP-712 is easier to use on flat structs, and many projects use it on such. However, ERC-7683’s ResolvedCrossChainOrder struct (used in SolverNet) is quite complex, has nested struct arrays, and dynamic values such as byte arrays.</p>
+
+<p>I could find no good examples for how to properly build out my typehashes, let alone how to properly sign the orders in Solidity within Foundry tests. However, with the release of Claude 4, I was able to have it comprehensively teach me everything I needed to know about EIP-712 and permit2, especially its witness logic.</p>
+
+<p>So, I decided to take what I learned and produce a document to help guide new devs through fully learning how to use these tools, while understanding their importance. As I pretty much solely work in Foundry, I also walk through signing these structs in Solidity, in order to assist with testing such integrations. Throughout this document, I introduce these concepts through the scope of building an onchain bug bounty system.</p>
+
+<p>Other resources are available elsewhere to showcase how to produce these signatures offchain with software such as <a href="https://blog.emn178.cc/en/post/using-ethers-js-to-sign-eip-712-typed-structured-data/" class="web-link">ethers</a>, <a href="https://viem.sh/docs/actions/wallet/signTypedData.html" class="web-link">viem</a>, or <a href="https://wagmi.sh/core/api/actions/signTypedData" class="web-link">wagmi</a>.</p>
+
+<hr>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ul>
+  <li>
+<a href="#eip-712-and-permit2-a-developers-guide" class="web-link">EIP-712 and Permit2: A Developer’s Guide</a>
+    <ul>
+      <li><a href="#table-of-contents" class="web-link">Table of Contents</a></li>
+      <li>
+<a href="#understanding-eip-712-making-signatures-human-readable" class="web-link">Understanding EIP-712: Making Signatures Human-Readable</a>
+        <ul>
+          <li><a href="#the-problem-users-signing-blind" class="web-link">The Problem: Users Signing Blind</a></li>
+          <li><a href="#eip-712-the-solution" class="web-link">EIP-712: The Solution</a></li>
+          <li>
+<a href="#how-eip-712-works-under-the-hood" class="web-link">How EIP-712 Works Under the Hood</a>
+            <ul>
+              <li><a href="#1-domain-separator-your-apps-unique-fingerprint" class="web-link">1. Domain Separator: Your App’s Unique Fingerprint</a></li>
+              <li><a href="#2-type-hash-the-structure-definition" class="web-link">2. Type Hash: The Structure Definition</a></li>
+              <li><a href="#3-struct-hash-encoding-your-actual-data" class="web-link">3. Struct Hash: Encoding Your Actual Data</a></li>
+              <li><a href="#putting-it-all-together" class="web-link">Putting It All Together</a></li>
+            </ul>
+          </li>
+          <li><a href="#verifying-eip-712-signatures-in-your-contract" class="web-link">Verifying EIP-712 Signatures in Your Contract</a></li>
+          <li><a href="#advanced-eip-712-nested-structs" class="web-link">Advanced EIP-712: Nested Structs</a></li>
+          <li>
+<a href="#advanced-eip-712-array-types" class="web-link">Advanced EIP-712: Array Types</a>
+            <ul>
+              <li><a href="#basic-array-types" class="web-link">Basic Array Types</a></li>
+              <li><a href="#arrays-of-structs-the-complex-case" class="web-link">Arrays of Structs: The Complex Case</a></li>
+              <li><a href="#the-array-hashing-algorithm" class="web-link">The Array Hashing Algorithm</a></li>
+              <li><a href="#empty-arrays-and-edge-cases" class="web-link">Empty Arrays and Edge Cases</a></li>
+              <li><a href="#practical-example-multi-vulnerability-payout-authorization" class="web-link">Practical Example: Multi-Vulnerability Payout Authorization</a></li>
+              <li><a href="#critical-rules-for-array-hashing" class="web-link">Critical Rules for Array Hashing</a></li>
+              <li><a href="#array-type-string-construction" class="web-link">Array Type String Construction</a></li>
+              <li><a href="#common-array-pitfalls" class="web-link">Common Array Pitfalls</a></li>
+            </ul>
+          </li>
+          <li><a href="#general-eip-712-pitfalls-and-best-practices" class="web-link">General EIP-712 Pitfalls and Best Practices</a></li>
+        </ul>
+      </li>
+      <li>
+<a href="#permit2-the-ultimate-token-permission-system" class="web-link">Permit2: The Ultimate Token Permission System</a>
+        <ul>
+          <li><a href="#the-traditional-approval-problem" class="web-link">The Traditional Approval Problem</a></li>
+          <li><a href="#what-is-permit2" class="web-link">What is Permit2?</a></li>
+          <li>
+<a href="#permit2s-dual-architecture" class="web-link">Permit2’s Dual Architecture</a>
+            <ul>
+              <li><a href="#system-comparison-at-a-glance" class="web-link">System Comparison at a Glance</a></li>
+            </ul>
+          </li>
+          <li>
+<a href="#allowancetransfer-enhanced-traditional-approvals" class="web-link">AllowanceTransfer: Enhanced Traditional Approvals</a>
+            <ul>
+              <li><a href="#core-data-structures" class="web-link">Core Data Structures</a></li>
+              <li><a href="#how-allowancetransfer-works" class="web-link">How AllowanceTransfer Works</a></li>
+              <li><a href="#allowancetransfer-eip-712-implementation" class="web-link">AllowanceTransfer EIP-712 Implementation</a></li>
+              <li><a href="#using-allowancetransfer-in-your-bug-bounty-contract" class="web-link">Using AllowanceTransfer in Your Bug Bounty Contract</a></li>
+              <li><a href="#ordered-nonce-management-in-allowancetransfer" class="web-link">Ordered Nonce Management in AllowanceTransfer</a></li>
+            </ul>
+          </li>
+          <li>
+<a href="#signaturetransfer-direct-one-time-transfers" class="web-link">SignatureTransfer: Direct One-Time Transfers</a>
+            <ul>
+              <li><a href="#core-data-structures-1" class="web-link">Core Data Structures</a></li>
+              <li><a href="#how-signaturetransfer-works" class="web-link">How SignatureTransfer Works</a></li>
+              <li><a href="#signaturetransfer-eip-712-implementation" class="web-link">SignatureTransfer EIP-712 Implementation</a></li>
+              <li><a href="#unordered-nonce-management-in-signaturetransfer" class="web-link">Unordered Nonce Management in SignatureTransfer</a></li>
+            </ul>
+          </li>
+          <li>
+<a href="#batch-operations-maximum-efficiency" class="web-link">Batch Operations: Maximum Efficiency</a>
+            <ul>
+              <li><a href="#allowancetransfer-batch" class="web-link">AllowanceTransfer Batch</a></li>
+              <li><a href="#signaturetransfer-batch" class="web-link">SignatureTransfer Batch</a></li>
+            </ul>
+          </li>
+          <li><a href="#permit2s-eip-712-domain-setup" class="web-link">Permit2’s EIP-712 Domain Setup</a></li>
+          <li>
+<a href="#security-considerations-and-error-handling" class="web-link">Security Considerations and Error Handling</a>
+            <ul>
+              <li><a href="#time-based-protections" class="web-link">Time-based Protections</a></li>
+              <li><a href="#amount-validations" class="web-link">Amount Validations</a></li>
+              <li><a href="#nonce-based-replay-protection" class="web-link">Nonce-based Replay Protection</a></li>
+            </ul>
+          </li>
+          <li><a href="#emergency-features" class="web-link">Emergency Features</a></li>
+          <li>
+<a href="#gas-efficiency-benefits" class="web-link">Gas Efficiency Benefits</a>
+            <ul>
+              <li><a href="#traditional-approach-vs-permit2" class="web-link">Traditional Approach vs Permit2</a></li>
+              <li><a href="#permit2-approach" class="web-link">Permit2 Approach</a></li>
+              <li><a href="#batch-operations-provide-maximum-efficiency" class="web-link">Batch Operations Provide Maximum Efficiency</a></li>
+            </ul>
+          </li>
+          <li><a href="#integration-example-complete-bug-bounty-flow" class="web-link">Integration Example: Complete Bug Bounty Flow</a></li>
+          <li><a href="#choosing-between-allowancetransfer-and-signaturetransfer" class="web-link">Choosing Between AllowanceTransfer and SignatureTransfer</a></li>
+          <li><a href="#best-practices-for-bug-bounty-platforms" class="web-link">Best Practices for Bug Bounty Platforms</a></li>
+        </ul>
+      </li>
+      <li>
+<a href="#permit2-witness-transfers-adding-custom-logic" class="web-link">Permit2 Witness Transfers: Adding Custom Logic</a>
+        <ul>
+          <li><a href="#what-are-witness-transfers" class="web-link">What are Witness Transfers?</a></li>
+          <li><a href="#the-problem-witness-transfers-solve" class="web-link">The Problem Witness Transfers Solve</a></li>
+          <li><a href="#witness-transfer-fundamentals" class="web-link">Witness Transfer Fundamentals</a></li>
+          <li><a href="#basic-witness-implementation-vulnerability-verification" class="web-link">Basic Witness Implementation: Vulnerability Verification</a></li>
+          <li><a href="#witness-type-string-the-critical-component" class="web-link">Witness Type String: The Critical Component</a></li>
+          <li><a href="#advanced-witness-nested-structs" class="web-link">Advanced Witness: Nested Structs</a></li>
+          <li><a href="#dynamic-data-witness-including-custom-instructions" class="web-link">Dynamic Data Witness: Including Custom Instructions</a></li>
+          <li><a href="#array-witness-batch-vulnerability-processing" class="web-link">Array Witness: Batch Vulnerability Processing</a></li>
+          <li><a href="#complete-signature-generation-for-witnesses" class="web-link">Complete Signature Generation for Witnesses</a></li>
+          <li><a href="#witness-vs-non-witness-when-to-use-each" class="web-link">Witness vs Non-Witness: When to Use Each</a></li>
+          <li><a href="#security-considerations-for-witness-transfers" class="web-link">Security Considerations for Witness Transfers</a></li>
+          <li><a href="#advanced-patterns-conditional-logic" class="web-link">Advanced Patterns: Conditional Logic</a></li>
+          <li><a href="#best-practices-for-witness-transfers" class="web-link">Best Practices for Witness Transfers</a></li>
+        </ul>
+      </li>
+      <li>
+<a href="#conclusion" class="web-link">Conclusion</a>
+        <ul>
+          <li><a href="#what-youve-learned" class="web-link">What You’ve Learned</a></li>
+          <li><a href="#the-bug-bounty-platform-a-complete-example" class="web-link">The Bug Bounty Platform: A Complete Example</a></li>
+          <li><a href="#key-architectural-decisions" class="web-link">Key Architectural Decisions</a></li>
+          <li><a href="#getting-started" class="web-link">Getting Started</a></li>
+          <li><a href="#resources-for-continued-learning" class="web-link">Resources for Continued Learning</a></li>
+          <li><a href="#final-thoughts" class="web-link">Final Thoughts</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr>
+
+<h2 id="understanding-eip-712-making-signatures-human-readable">Understanding EIP-712: Making Signatures Human-Readable</h2>
+
+<h3 id="the-problem-users-signing-blind">The Problem: Users Signing Blind</h3>
+
+<p>Imagine you’re building a decentralized bug bounty platform where security researchers get paid in tokens for finding vulnerabilities. Before EIP-712, if a project team wanted to approve a bounty, they’d see something like this in their wallet:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sign this message: 0x1c8aff950685c2ed4bc3174f3472287b56d9517b9c948127319a09a7a36deac8
+</code></pre></div></div>
+
+<p>That’s completely meaningless to humans. The team has no idea if they’re signing a claim for a legitimate $1,000 bounty or accidentally signing away their entire wallet. This experience creates massive security risks and terrible user experiences.</p>
+
+<h3 id="eip-712-the-solution">EIP-712: The Solution</h3>
+
+<p>EIP-712 (Ethereum Improvement Proposal 712) solves this by letting users sign <strong>structured, meaningful data</strong> that wallets can display clearly. Instead of mysterious hex, project teams see exactly what they’re signing:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"Bounty Payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"recipient"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x742d35cc6634c0532925a3b8d428c1e21c2a2e59"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10000 USDC"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"bugId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-2025-003"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Critical"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deadline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-01-15 14:30:00 UTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Bringing clarity to the information being signed makes crypto more secure and user-friendly.</p>
+
+<h3 id="how-eip-712-works-under-the-hood">How EIP-712 Works Under the Hood</h3>
+
+<p>When you sign structured data with EIP-712, the process combines three essential components into a final hash that gets signed. Think of it like creating a tamper-proof package with multiple security seals:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Final Hash = keccak256("\x19\x01" ‖ Domain Separator ‖ Struct Hash)
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">\x19\x01</code> prefix is a magic value that prevents this signature from ever being confused with a regular Ethereum transaction. Let’s break down the other components:</p>
+
+<h4 id="1-domain-separator-your-apps-unique-fingerprint">1. Domain Separator: Your App’s Unique Fingerprint</h4>
+
+<p>The domain separator is like a unique seal that ensures signatures can only be used in your specific application. It prevents replay attacks across different protocols. Here’s what it contains:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">EIP712Domain</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>               <span class="c1">// "HackerBounty"
+</span>    <span class="kt">string</span> <span class="n">version</span><span class="p">;</span>            <span class="c1">// "1" 
+</span>    <span class="kt">uint256</span> <span class="n">chainId</span><span class="p">;</span>           <span class="c1">// 1 (Ethereum mainnet)
+</span>    <span class="kt">address</span> <span class="n">verifyingContract</span><span class="p">;</span> <span class="c1">// 0x1234...abcd
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>Each field serves a critical purpose:</p>
+
+<ul>
+  <li>
+<strong>name</strong>: Your protocol’s name.</li>
+  <li>
+<strong>version</strong>: Allows you to upgrade your protocol while invalidating old signatures</li>
+  <li>
+<strong>chainId</strong>: Prevents signatures from Ethereum being used on Arbitrum or other chains</li>
+  <li>
+<strong>verifyingContract</strong>: Ties signatures to your specific deployed contract address</li>
+</ul>
+
+<p>The domain separator is computed once and can be stored:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bytes32</span> <span class="n">DOMAIN_SEPARATOR</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="nb">keccak256</span><span class="p">(</span><span class="s">"EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"</span><span class="p">),</span>
+    <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="s">"HackerBounty"</span><span class="p">)),</span>
+    <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="s">"1"</span><span class="p">)),</span>
+    <span class="n">block</span><span class="p">.</span><span class="n">chainid</span><span class="p">,</span>
+    <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div></div>
+
+<p>This unique set of variables ensures that every app can avoid signature reuse between other applications, or even incompatible versions of itself.</p>
+
+<h4 id="2-type-hash-the-structure-definition">2. Type Hash: The Structure Definition</h4>
+
+<p>Every data structure you want to sign needs a type hash. Think of it as a schema definition that ensures both the signer and verifier agree on exactly what fields exist and their types. For our bug bounty payment:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">BountyPayment</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="n">recipient</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">amount</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">bugId</span><span class="p">;</span>
+    <span class="kt">uint8</span> <span class="n">severity</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">deadline</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// The type hash is the keccak256 of the struct definition string
+</span><span class="kt">bytes32</span> <span class="n">PAYMENT_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"BountyPayment(address recipient,uint256 amount,string bugId,uint8 severity,uint256 deadline)"</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>This type hash becomes part of the struct hash (explained next), ensuring that even if an attacker tries to add or remove fields, the signature becomes invalid.</p>
+
+<h4 id="3-struct-hash-encoding-your-actual-data">3. Struct Hash: Encoding Your Actual Data</h4>
+
+<p>This is where your actual bounty payment data gets encoded and hashed. The encoding follows specific rules based on the data types:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">hashPayment</span><span class="p">(</span><span class="n">BountyPayment</span> <span class="k">memory</span> <span class="n">payment</span><span class="p">)</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">PAYMENT_TYPEHASH</span><span class="p">,</span>                <span class="c1">// Always first - identifies the struct type
+</span>        <span class="n">payment</span><span class="p">.</span><span class="n">recipient</span><span class="p">,</span>               <span class="c1">// address: encoded as-is (static type)
+</span>        <span class="n">payment</span><span class="p">.</span><span class="n">amount</span><span class="p">,</span>                  <span class="c1">// uint256: encoded as-is (static type)
+</span>        <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">bugId</span><span class="p">)),</span> <span class="c1">// string: must be hashed first (dynamic type)
+</span>        <span class="n">payment</span><span class="p">.</span><span class="n">severity</span><span class="p">,</span>                <span class="c1">// uint8: encoded as-is (static type)
+</span>        <span class="n">payment</span><span class="p">.</span><span class="n">deadline</span>                 <span class="c1">// uint256: encoded as-is (static type)
+</span>    <span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Critical Encoding Rules:</strong></p>
+<ul>
+  <li>
+<strong>Static types</strong> (address, uint, bool, bytes1-bytes32) are encoded directly with <code class="language-plaintext highlighter-rouge">abi.encode</code>
+</li>
+  <li>
+<strong>Dynamic types</strong> (string, bytes, arrays) must be hashed with <code class="language-plaintext highlighter-rouge">keccak256</code> first</li>
+  <li>The type hash always comes first in the encoding</li>
+  <li>Field order must match the type definition exactly</li>
+</ul>
+
+<h4 id="putting-it-all-together">Putting It All Together</h4>
+
+<p>Here’s the complete flow for creating an EIP-712 signature:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 1. Define your struct and create an instance
+</span><span class="n">BountyPayment</span> <span class="k">memory</span> <span class="n">payment</span> <span class="o">=</span> <span class="n">BountyPayment</span><span class="p">({</span>
+    <span class="n">recipient</span><span class="o">:</span> <span class="mh">0x742d35cc6634c0532925a3b8d428c1e21c2a2e59</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">:</span> <span class="mi">10000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="c1">// 10000 USDC (6 decimals)
+</span>    <span class="n">bugId</span><span class="o">:</span> <span class="s">"SOL-2025-003"</span><span class="p">,</span>
+    <span class="n">severity</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>           <span class="c1">// Critical
+</span>    <span class="n">deadline</span><span class="o">:</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="mi">24</span> <span class="kc">hours</span>
+<span class="p">});</span>
+
+<span class="c1">// 2. Hash the struct
+</span><span class="kt">bytes32</span> <span class="n">structHash</span> <span class="o">=</span> <span class="n">hashPayment</span><span class="p">(</span><span class="n">payment</span><span class="p">);</span>
+
+<span class="c1">// 3. Create the final digest
+</span><span class="kt">bytes32</span> <span class="n">digest</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span>
+    <span class="s">"</span><span class="se">\x19\x01</span><span class="s">"</span><span class="p">,</span>
+    <span class="n">DOMAIN_SEPARATOR</span><span class="p">,</span>
+    <span class="n">structHash</span>
+<span class="p">));</span>
+
+<span class="c1">// 4. Sign the digest (in practice, this happens in the project team's wallet, but this is how foundry does it)
+</span><span class="p">(</span><span class="kt">uint8</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bytes32</span> <span class="n">r</span><span class="p">,</span> <span class="kt">bytes32</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="n">vm</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="n">privateKey</span><span class="p">,</span> <span class="n">digest</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="verifying-eip-712-signatures-in-your-contract">Verifying EIP-712 Signatures in Your Contract</h3>
+
+<p>Once a project team submits their signed payment authorization, your contract needs to verify it:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">contract</span> <span class="n">HackerBounty</span> <span class="p">{</span>
+    <span class="kt">bytes32</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">DOMAIN_SEPARATOR</span> <span class="o">=</span> <span class="cm">/* computed at deployment */</span><span class="p">;</span>
+    
+    <span class="k">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint256</span><span class="p">)</span> <span class="k">public</span> <span class="n">nonces</span><span class="p">;</span>
+    <span class="k">mapping</span><span class="p">(</span><span class="kt">string</span> <span class="o">=&gt;</span> <span class="kt">bool</span><span class="p">)</span> <span class="k">public</span> <span class="n">processedBugs</span><span class="p">;</span>
+    <span class="k">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">bool</span><span class="p">)</span> <span class="k">public</span> <span class="n">authorizedProjects</span><span class="p">;</span>
+    
+    <span class="k">function</span> <span class="n">processBountyPayment</span><span class="p">(</span>
+        <span class="n">BountyPayment</span> <span class="k">calldata</span> <span class="n">payment</span><span class="p">,</span>
+        <span class="kt">uint8</span> <span class="n">v</span><span class="p">,</span>
+        <span class="kt">bytes32</span> <span class="n">r</span><span class="p">,</span>
+        <span class="kt">bytes32</span> <span class="n">s</span>
+    <span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+        <span class="c1">// Prevent double-processing
+</span>        <span class="nb">require</span><span class="p">(</span><span class="o">!</span><span class="n">processedBugs</span><span class="p">[</span><span class="n">payment</span><span class="p">.</span><span class="n">bugId</span><span class="p">],</span> <span class="s">"Bug already processed"</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">deadline</span> <span class="o">&gt;=</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span><span class="p">,</span> <span class="s">"Payment expired"</span><span class="p">);</span>
+        
+        <span class="c1">// Recreate the digest
+</span>        <span class="kt">bytes32</span> <span class="n">digest</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span>
+            <span class="s">"</span><span class="se">\x19\x01</span><span class="s">"</span><span class="p">,</span>
+            <span class="n">DOMAIN_SEPARATOR</span><span class="p">,</span>
+            <span class="n">hashPayment</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+        <span class="p">));</span>
+        
+        <span class="c1">// Recover the signer (should be the project team)
+</span>        <span class="kt">address</span> <span class="n">projectTeam</span> <span class="o">=</span> <span class="nb">ecrecover</span><span class="p">(</span><span class="n">digest</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">authorizedProjects</span><span class="p">[</span><span class="n">projectTeam</span><span class="p">],</span> <span class="s">"Unauthorized project"</span><span class="p">);</span>
+        
+        <span class="c1">// Mark as processed and pay out
+</span>        <span class="n">processedBugs</span><span class="p">[</span><span class="n">payment</span><span class="p">.</span><span class="n">bugId</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">IERC20</span><span class="p">(</span><span class="n">USDC</span><span class="p">).</span><span class="n">transferFrom</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">payment</span><span class="p">.</span><span class="n">recipient</span><span class="p">,</span> <span class="n">payment</span><span class="p">.</span><span class="n">amount</span><span class="p">);</span>
+        
+        <span class="k">emit</span> <span class="n">BountyPaid</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">recipient</span><span class="p">,</span> <span class="n">payment</span><span class="p">.</span><span class="n">bugId</span><span class="p">,</span> <span class="n">payment</span><span class="p">.</span><span class="n">amount</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="advanced-eip-712-nested-structs">Advanced EIP-712: Nested Structs</h3>
+
+<p>As your bug bounty platform grows, you might need more complex data structures. EIP-712 supports nested structs, but they require special handling:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">PaymentDetails</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="n">bugId</span><span class="p">;</span>
+    <span class="kt">uint8</span> <span class="n">severity</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">description</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">AdvancedPayment</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="n">recipient</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">amount</span><span class="p">;</span>
+    <span class="n">PaymentDetails</span> <span class="n">details</span><span class="p">;</span> <span class="c1">// Nested struct
+</span>    <span class="kt">uint256</span> <span class="n">deadline</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>When working with nested structs:</p>
+<ol>
+  <li>Each nested struct needs its own type hash</li>
+  <li>Hash nested structs separately, then use their hash in the parent</li>
+  <li>Type definitions must include all referenced structs</li>
+</ol>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bytes32</span> <span class="k">constant</span> <span class="n">DETAILS_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"PaymentDetails(string bugId,uint8 severity,string description)"</span>
+<span class="p">);</span>
+
+<span class="kt">bytes32</span> <span class="k">constant</span> <span class="n">ADVANCED_PAYMENT_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"AdvancedPayment(address recipient,uint256 amount,PaymentDetails details,uint256 deadline)PaymentDetails(string bugId,uint8 severity,string description)"</span>
+<span class="p">);</span>
+
+<span class="k">function</span> <span class="n">hashAdvancedPayment</span><span class="p">(</span><span class="n">AdvancedPayment</span> <span class="k">memory</span> <span class="n">payment</span><span class="p">)</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// First hash the nested struct
+</span>    <span class="kt">bytes32</span> <span class="n">detailsHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">DETAILS_TYPEHASH</span><span class="p">,</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">bugId</span><span class="p">)),</span>      <span class="c1">// dynamic type
+</span>        <span class="n">payment</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">severity</span><span class="p">,</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">description</span><span class="p">))</span> <span class="c1">// dynamic type
+</span>    <span class="p">));</span>
+    
+    <span class="c1">// Then hash the parent struct using the nested struct's hash
+</span>    <span class="k">return</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">ADVANCED_PAYMENT_TYPEHASH</span><span class="p">,</span>
+        <span class="n">payment</span><span class="p">.</span><span class="n">recipient</span><span class="p">,</span>
+        <span class="n">payment</span><span class="p">.</span><span class="n">amount</span><span class="p">,</span>
+        <span class="n">detailsHash</span><span class="p">,</span> <span class="c1">// Use the hash, not the struct itself
+</span>        <span class="n">payment</span><span class="p">.</span><span class="n">deadline</span>
+    <span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="advanced-eip-712-array-types">Advanced EIP-712: Array Types</h3>
+
+<p>Real-world bug bounty platforms often need to handle multiple actions or data points in a single transaction. Perhaps a project team wants to pay multiple researchers for different vulnerabilities, or your platform needs to process batched bounty payouts. EIP-712 supports arrays, but they follow specific hashing rules that are crucial to understand.</p>
+
+<h4 id="basic-array-types">Basic Array Types</h4>
+
+<p>Let’s start with simple arrays of basic types:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">BatchPayout</span> <span class="p">{</span>
+    <span class="kt">address</span><span class="p">[]</span> <span class="n">recipients</span><span class="p">;</span> <span class="c1">// Array of researcher addresses
+</span>    <span class="kt">uint256</span><span class="p">[]</span> <span class="n">amounts</span><span class="p">;</span>    <span class="c1">// Array of payment amounts  
+</span>    <span class="kt">string</span><span class="p">[]</span> <span class="n">bugIds</span><span class="p">;</span>      <span class="c1">// Array of bug IDs
+</span>    <span class="kt">uint256</span> <span class="n">deadline</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bytes32</span> <span class="k">constant</span> <span class="n">BATCH_PAYOUT_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"BatchPayout(address[] recipients,uint256[] amounts,string[] bugIds,uint256 deadline)"</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Key rules for basic arrays:</strong></p>
+<ul>
+  <li>Array types are denoted with <code class="language-plaintext highlighter-rouge">[]</code> in the type definition</li>
+  <li>Arrays are always treated as dynamic types, even if they contain static elements</li>
+  <li>Arrays must be hashed using <code class="language-plaintext highlighter-rouge">keccak256</code> before encoding in the parent struct</li>
+</ul>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">hashBatchPayout</span><span class="p">(</span><span class="n">BatchPayout</span> <span class="k">memory</span> <span class="n">payout</span><span class="p">)</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">BATCH_PAYOUT_TYPEHASH</span><span class="p">,</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="n">payout</span><span class="p">.</span><span class="n">recipients</span><span class="p">)),</span> <span class="c1">// Hash the packed array
+</span>        <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="n">payout</span><span class="p">.</span><span class="n">amounts</span><span class="p">)),</span>    <span class="c1">// Hash the packed array
+</span>        <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span>                     <span class="c1">// String arrays need special handling
+</span>            <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">payout</span><span class="p">.</span><span class="n">bugIds</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>         <span class="c1">// Hash each string element
+</span>            <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">payout</span><span class="p">.</span><span class="n">bugIds</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span>         <span class="c1">// then pack and hash the result
+</span>            <span class="c1">// ... for each element
+</span>        <span class="p">)),</span>
+        <span class="n">payout</span><span class="p">.</span><span class="n">deadline</span>
+    <span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="arrays-of-structs-the-complex-case">Arrays of Structs: The Complex Case</h4>
+
+<p>The most sophisticated scenario involves arrays of custom structs. Imagine your bug bounty platform needs to handle multiple vulnerability payouts in a single transaction:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">VulnerabilityPayout</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="n">bugId</span><span class="p">;</span>
+    <span class="kt">uint8</span> <span class="n">severity</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">description</span><span class="p">;</span>
+    <span class="kt">address</span> <span class="n">recipient</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">MultiPayoutAuthorization</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">;</span>
+    <span class="n">VulnerabilityPayout</span><span class="p">[]</span> <span class="n">payouts</span><span class="p">;</span> <span class="c1">// Array of structs
+</span>    <span class="kt">uint256</span> <span class="n">totalAmount</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">deadline</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This requires careful handling of the type definitions and hashing:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Individual struct type hash
+</span><span class="kt">bytes32</span> <span class="k">constant</span> <span class="n">VULNERABILITY_PAYOUT_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"VulnerabilityPayout(string bugId,uint8 severity,string description,address recipient)"</span>
+<span class="p">);</span>
+
+<span class="c1">// Main struct type hash, all referenced structs are included alphabetically
+</span><span class="kt">bytes32</span> <span class="k">constant</span> <span class="n">MULTI_PAYOUT_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"MultiPayoutAuthorization(address projectTeam,VulnerabilityPayout[] payouts,uint256 totalAmount,uint256 deadline)VulnerabilityPayout(string bugId,uint8 severity,string description,address recipient)"</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="the-array-hashing-algorithm">The Array Hashing Algorithm</h4>
+
+<p>Arrays of structs follow a specific concatenation and hashing pattern defined by EIP-712:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">_hashPayoutArray</span><span class="p">(</span><span class="n">VulnerabilityPayout</span><span class="p">[]</span> <span class="k">memory</span> <span class="n">payouts</span><span class="p">)</span> <span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle empty arrays
+</span>    <span class="k">if</span> <span class="p">(</span><span class="n">payouts</span><span class="p">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">""</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// For non-empty arrays: hash each element, concatenate, then hash the result
+</span>    <span class="kt">bytes</span> <span class="k">memory</span> <span class="n">encodedPayouts</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">uint256</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">payouts</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Hash each struct individually using its type hash
+</span>        <span class="kt">bytes32</span> <span class="n">payoutHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+            <span class="n">VULNERABILITY_PAYOUT_TYPEHASH</span><span class="p">,</span>
+            <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">payouts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">bugId</span><span class="p">)),</span>       <span class="c1">// Dynamic type: hash first
+</span>            <span class="n">payouts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">severity</span><span class="p">,</span>                      <span class="c1">// Static type: encode directly
+</span>            <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">payouts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">description</span><span class="p">)),</span> <span class="c1">// Dynamic type: hash first
+</span>            <span class="n">payouts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">recipient</span>                      <span class="c1">// Static type: encode directly
+</span>        <span class="p">));</span>
+        
+        <span class="c1">// Concatenate this hash to our running bytes
+</span>        <span class="n">encodedPayouts</span> <span class="o">=</span> <span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="n">encodedPayouts</span><span class="p">,</span> <span class="n">payoutHash</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Hash the concatenated result
+</span>    <span class="k">return</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">encodedPayouts</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">hashMultiPayoutAuthorization</span><span class="p">(</span><span class="n">MultiPayoutAuthorization</span> <span class="k">memory</span> <span class="n">auth</span><span class="p">)</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">MULTI_PAYOUT_TYPEHASH</span><span class="p">,</span>
+        <span class="n">auth</span><span class="p">.</span><span class="n">projectTeam</span><span class="p">,</span>
+        <span class="n">_hashPayoutArray</span><span class="p">(</span><span class="n">auth</span><span class="p">.</span><span class="n">payouts</span><span class="p">),</span> <span class="c1">// Use the hash of the array
+</span>        <span class="n">auth</span><span class="p">.</span><span class="n">totalAmount</span><span class="p">,</span>
+        <span class="n">auth</span><span class="p">.</span><span class="n">deadline</span>
+    <span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="empty-arrays-and-edge-cases">Empty Arrays and Edge Cases</h4>
+
+<p>Empty arrays have special handling that’s important to understand:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">demonstrateEmptyArrays</span><span class="p">()</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">VulnerabilityPayout</span><span class="p">[]</span> <span class="k">memory</span> <span class="n">emptyPayouts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">VulnerabilityPayout</span><span class="p">[](</span><span class="mi">0</span><span class="p">);</span>
+    
+    <span class="c1">// Empty arrays hash to keccak256("")
+</span>    <span class="kt">bytes32</span> <span class="n">emptyHash</span> <span class="o">=</span> <span class="n">_hashPayoutArray</span><span class="p">(</span><span class="n">emptyPayouts</span><span class="p">);</span>
+    <span class="nb">assert</span><span class="p">(</span><span class="n">emptyHash</span> <span class="o">==</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">""</span><span class="p">));</span>
+    
+    <span class="k">return</span> <span class="n">emptyHash</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This ensures that empty arrays have a consistent, deterministic hash while remaining distinct from other empty data.</p>
+
+<h4 id="practical-example-multi-vulnerability-payout-authorization">Practical Example: Multi-Vulnerability Payout Authorization</h4>
+
+<p>Here’s how a complete multi-vulnerability payout authorization would work:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">authorizeMultiplePayouts</span><span class="p">()</span> <span class="k">external</span> <span class="p">{</span>
+    <span class="c1">// Create multiple vulnerability payouts
+</span>    <span class="n">VulnerabilityPayout</span><span class="p">[]</span> <span class="k">memory</span> <span class="n">payouts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">VulnerabilityPayout</span><span class="p">[](</span><span class="mi">2</span><span class="p">);</span>
+    
+    <span class="n">payouts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">VulnerabilityPayout</span><span class="p">({</span>
+        <span class="n">bugId</span><span class="o">:</span> <span class="s">"RE-2025-003"</span><span class="p">,</span>
+        <span class="n">severity</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="c1">// Critical
+</span>        <span class="n">description</span><span class="o">:</span> <span class="s">"Reentrancy can drain the contract in one transaction"</span><span class="p">,</span>
+        <span class="n">recipient</span><span class="o">:</span> <span class="mh">0x1234567890123456789012345678901234567890</span> <span class="c1">// Researcher A
+</span>    <span class="p">});</span>
+    
+    <span class="n">payouts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">VulnerabilityPayout</span><span class="p">({</span>
+        <span class="n">bugId</span><span class="o">:</span> <span class="s">"DEP-2025-002"</span><span class="p">,</span> 
+        <span class="n">severity</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1">// Medium
+</span>        <span class="n">description</span><span class="o">:</span> <span class="s">"Bad order construction can lead to user deposits not being refunded"</span><span class="p">,</span>
+        <span class="n">recipient</span><span class="o">:</span> <span class="mh">0xABCDEF1234567890123456789012345678901234</span> <span class="c1">// Researcher B
+</span>    <span class="p">});</span>
+    
+    <span class="n">MultiPayoutAuthorization</span> <span class="k">memory</span> <span class="n">authorization</span> <span class="o">=</span> <span class="n">MultiPayoutAuthorization</span><span class="p">({</span>
+        <span class="n">projectTeam</span><span class="o">:</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span>
+        <span class="n">payouts</span><span class="o">:</span> <span class="n">payouts</span><span class="p">,</span>
+        <span class="n">totalAmount</span><span class="o">:</span> <span class="mi">5000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="c1">// 5000 USDC total
+</span>        <span class="n">deadline</span><span class="o">:</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="mi">7</span> <span class="kc">days</span>
+    <span class="p">});</span>
+    
+    <span class="c1">// The hash includes all payout data in a tamper-proof way
+</span>    <span class="kt">bytes32</span> <span class="n">authHash</span> <span class="o">=</span> <span class="n">hashMultiPayoutAuthorization</span><span class="p">(</span><span class="n">authorization</span><span class="p">);</span>
+    
+    <span class="c1">// Project team signs this hash, knowing exactly what researchers they're paying
+</span>    <span class="c1">// Wallet will display the structured data clearly
+</span>
+    <span class="c1">// {Payment splitting and processing logic}
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="critical-rules-for-array-hashing">Critical Rules for Array Hashing</h4>
+
+<ol>
+  <li>
+<strong>Empty Arrays</strong>: Always hash to <code class="language-plaintext highlighter-rouge">keccak256("")</code>
+</li>
+  <li>
+<strong>Non-Empty Static Type Arrays</strong>: Hash the entire <code class="language-plaintext highlighter-rouge">abi.encodePacked</code> array</li>
+  <li>
+<strong>Non-Empty Dynamic Type Arrays</strong>: Hash each element individually, concatenate with <code class="language-plaintext highlighter-rouge">abi.encodePacked</code>, then hash the result</li>
+  <li>
+<strong>Dynamic Types in Arrays</strong>: String and bytes fields within array elements must be hashed before encoding</li>
+  <li>
+<strong>Order Matters</strong>: Array element order affects the final hash</li>
+  <li>
+<strong>Type Definitions</strong>: Include all referenced struct types in alphabetical order</li>
+</ol>
+
+<h4 id="array-type-string-construction">Array Type String Construction</h4>
+
+<p>When arrays are involved, your type strings become more complex but follow predictable patterns:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// For arrays of structs, all referenced types must be included
+</span><span class="kt">string</span> <span class="k">constant</span> <span class="n">MULTI_PAYOUT_TYPE_STRING</span> <span class="o">=</span> 
+    <span class="s">"MultiPayoutAuthorization(address projectTeam,VulnerabilityPayout[] payouts,uint256 totalAmount,uint256 deadline)VulnerabilityPayout(string bugId,uint8 severity,string description,address recipient)"</span><span class="p">;</span>
+
+<span class="c1">// For simple arrays
+</span><span class="kt">string</span> <span class="k">constant</span> <span class="n">BATCH_PAYOUT_TYPE_STRING</span> <span class="o">=</span> 
+    <span class="s">"BatchPayout(address[] recipients,uint256[] amounts,string[] bugIds,uint256 deadline)"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="common-array-pitfalls">Common Array Pitfalls</h4>
+
+<ol>
+  <li>
+<strong>Forgetting Empty Array Handling</strong>: Always check for empty arrays and return <code class="language-plaintext highlighter-rouge">keccak256("")</code>
+</li>
+  <li>
+<strong>Wrong Concatenation Method</strong>: Use <code class="language-plaintext highlighter-rouge">abi.encodePacked</code> for concatenating hashes, not <code class="language-plaintext highlighter-rouge">abi.encode</code>
+</li>
+  <li>
+<strong>Type String Mismatches</strong>: Array notation in type strings must exactly match struct definitions</li>
+  <li>
+<strong>Dynamic Type Confusion</strong>: Remember that arrays themselves are always dynamic, even arrays of static types</li>
+  <li>
+<strong>Order Dependencies</strong>: Changing array element order changes the hash - ensure consistent ordering</li>
+</ol>
+
+<p>Understanding array hashing is crucial for building sophisticated EIP-712 systems. The patterns you’ve learned here will handle the vast majority of real-world scenarios, from simple batch operations to complex multi-struct arrays.</p>
+
+<h3 id="general-eip-712-pitfalls-and-best-practices">General EIP-712 Pitfalls and Best Practices</h3>
+
+<ol>
+  <li>
+<strong>Dynamic Type Encoding:</strong> Always hash strings, bytes, and arrays before encoding</li>
+  <li>
+<strong>Field Order:</strong> Must match exactly between type definition and encoding</li>
+  <li>
+<strong>Type String Format:</strong> No spaces except after commas, exact type names</li>
+  <li>
+<strong>Nested Struct Definitions:</strong> Include all referenced structs in alphabetical order</li>
+  <li>
+<strong>Domain Separator Caching:</strong> Can be computed once at deployment if chainId won’t change</li>
+</ol>
+
+<p>Now that you understand EIP-712’s structured signatures, let’s see how Permit2 builds on this foundation to create a universal token approval system in the next section.</p>
+
+<h2 id="permit2-the-ultimate-token-permission-system">Permit2: The Ultimate Token Permission System</h2>
+
+<h3 id="the-traditional-approval-problem">The Traditional Approval Problem</h3>
+
+<p>Before diving into permit2’s solutions, let’s understand the fundamental problem it solves. In traditional ERC-20 token systems, if your bug bounty platform wants to process payments from project teams to security researchers, you face a cumbersome two-step process:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Step 1: Project team approves your contract (requires gas)
+</span><span class="n">IERC20</span><span class="p">(</span><span class="n">token</span><span class="p">).</span><span class="n">approve</span><span class="p">(</span><span class="n">bugBountyContract</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+
+<span class="c1">// Step 2: Your contract transfers tokens to researchers (requires more gas)  
+</span><span class="n">IERC20</span><span class="p">(</span><span class="n">token</span><span class="p">).</span><span class="n">transferFrom</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">researcher</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This creates several problems for your bug bounty platform:</p>
+
+<ol>
+  <li>
+<strong>Poor User Experience</strong>: Project teams must send two separate transactions per payout</li>
+  <li>
+<strong>Gas Inefficiency</strong>: Each approval costs gas, even if never used</li>
+  <li>
+<strong>Security Risks</strong>: Unlimited approvals create attack vectors</li>
+  <li>
+<strong>No Expiration</strong>: Approvals persist indefinitely</li>
+  <li>
+<strong>Inflexibility</strong>: Can’t bundle approvals with complex logic</li>
+</ol>
+
+<h3 id="what-is-permit2">What is Permit2?</h3>
+
+<p>Permit2 is Uniswap’s battle-tested signature-based token permission system deployed at <code class="language-plaintext highlighter-rouge">0x000000000022D473030F116dDEE9F6B43aC78BA3</code> on all major networks. It solves the approval problem by introducing:</p>
+
+<ul>
+  <li>
+<strong>Signature-based permissions</strong> instead of on-chain approvals</li>
+  <li>
+<strong>Time-bound and amount-limited</strong> token access</li>
+  <li>
+<strong>Batch operations</strong> for multiple tokens</li>
+  <li>
+<strong>Gasless approvals</strong> that don’t require upfront transactions</li>
+  <li>
+<strong>Witness data</strong> for custom protocol logic (covered in Section 3)</li>
+</ul>
+
+<p>Your bug bounty platform benefits in multiple ways:</p>
+<ul>
+  <li>Project teams sign once instead of sending multiple transactions for each researcher payout</li>
+  <li>You can bundle token transfers with vulnerability verification logic</li>
+  <li>Time-limited permissions reduce long-term security risks</li>
+  <li>Batch operations enable complex multi-researcher bounty payouts</li>
+</ul>
+
+<h3 id="permit2s-dual-architecture">Permit2’s Dual Architecture</h3>
+
+<p>Permit2 provides two complementary systems, each optimized for different use cases:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="n">IPermit2</span> <span class="k">is</span> <span class="n">ISignatureTransfer</span><span class="p">,</span> <span class="n">IAllowanceTransfer</span> <span class="p">{</span>
+    <span class="c1">// Unified interface providing maximum flexibility
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="system-comparison-at-a-glance">System Comparison at a Glance</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>AllowanceTransfer</th>
+      <th>SignatureTransfer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Use Case</strong></td>
+      <td>Traditional approvals with signatures</td>
+      <td>One-time direct transfers</td>
+    </tr>
+    <tr>
+      <td><strong>Setup</strong></td>
+      <td>Sign once, transfer many times</td>
+      <td>Sign per transfer</td>
+    </tr>
+    <tr>
+      <td><strong>Nonce Management</strong></td>
+      <td>Ordered (sequential)</td>
+      <td>Unordered (bitmap-based)</td>
+    </tr>
+    <tr>
+      <td><strong>Best For</strong></td>
+      <td>Recurring payments, subscriptions</td>
+      <td>Order fulfillment, atomic swaps</td>
+    </tr>
+    <tr>
+      <td><strong>Gas Efficiency</strong></td>
+      <td>Optimal for multiple transfers</td>
+      <td>Optimal for single transfers</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="allowancetransfer-enhanced-traditional-approvals">AllowanceTransfer: Enhanced Traditional Approvals</h3>
+
+<p>AllowanceTransfer modernizes the traditional approval pattern with signature-based permissions. Think of it as “allowances with expiration dates and gasless setup.”</p>
+
+<h4 id="core-data-structures">Core Data Structures</h4>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">PermitDetails</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="n">token</span><span class="p">;</span>     <span class="c1">// The ERC20 token address
+</span>    <span class="kt">uint160</span> <span class="n">amount</span><span class="p">;</span>    <span class="c1">// Maximum spendable amount
+</span>    <span class="kt">uint48</span> <span class="n">expiration</span><span class="p">;</span> <span class="c1">// Unix timestamp when permission expires
+</span>    <span class="kt">uint48</span> <span class="n">nonce</span><span class="p">;</span>      <span class="c1">// Ordered nonce for replay protection
+</span><span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">PermitSingle</span> <span class="p">{</span>
+    <span class="n">PermitDetails</span> <span class="n">details</span><span class="p">;</span> <span class="c1">// The permission details
+</span>    <span class="kt">address</span> <span class="n">spender</span><span class="p">;</span>       <span class="c1">// Who can spend the tokens
+</span>    <span class="kt">uint256</span> <span class="n">sigDeadline</span><span class="p">;</span>   <span class="c1">// Signature validity deadline
+</span><span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">PackedAllowance</span> <span class="p">{</span>
+    <span class="kt">uint160</span> <span class="n">amount</span><span class="p">;</span>    <span class="c1">// Current remaining allowance
+</span>    <span class="kt">uint48</span> <span class="n">expiration</span><span class="p">;</span> <span class="c1">// When this allowance expires
+</span>    <span class="kt">uint48</span> <span class="n">nonce</span><span class="p">;</span>      <span class="c1">// Current nonce for this owner/token/spender
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="how-allowancetransfer-works">How AllowanceTransfer Works</h4>
+
+<p>The AllowanceTransfer system maintains a three-dimensional mapping that tracks permissions:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="k">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="k">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="n">PackedAllowance</span><span class="p">)))</span> <span class="k">public</span> <span class="n">allowance</span><span class="p">;</span>
+<span class="c1">//      owner   =&gt;          token  =&gt;         spender =&gt; permission details
+</span></code></pre></div></div>
+
+<p>For your bug bounty platform, here’s how a project team would grant permission for researcher payouts:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 1. Project team creates a permit for your contract to spend their tokens for bounties
+</span><span class="n">PermitSingle</span> <span class="k">memory</span> <span class="n">permit</span> <span class="o">=</span> <span class="n">PermitSingle</span><span class="p">({</span>
+    <span class="n">details</span><span class="o">:</span> <span class="n">PermitDetails</span><span class="p">({</span>
+        <span class="n">token</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">USDC</span><span class="p">),</span>
+        <span class="n">amount</span><span class="o">:</span> <span class="mi">10000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span>                 <span class="c1">// 10,000 USDC maximum for bounties
+</span>        <span class="n">expiration</span><span class="o">:</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="mi">30</span> <span class="kc">days</span><span class="p">,</span> <span class="c1">// Valid for 30 days
+</span>        <span class="n">nonce</span><span class="o">:</span> <span class="n">currentNonce</span>                    <span class="c1">// Current nonce for this project/token/spender
+</span>    <span class="p">}),</span>
+    <span class="n">spender</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">bugBountyContract</span><span class="p">),</span>       <span class="c1">// Your contract address
+</span>    <span class="n">sigDeadline</span><span class="o">:</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="mi">1</span> <span class="kc">hours</span>     <span class="c1">// Signature must be used within 1 hour
+</span><span class="p">});</span>
+
+<span class="c1">// 2. Project team signs the permit (off-chain, no gas)
+</span><span class="kt">bytes</span> <span class="k">memory</span> <span class="n">signature</span> <span class="o">=</span> <span class="n">signPermit</span><span class="p">(</span><span class="n">permit</span><span class="p">,</span> <span class="n">projectTeamPrivateKey</span><span class="p">);</span>
+
+<span class="c1">// 3. Anyone can submit the signed permit to grant permission
+</span><span class="n">permit2</span><span class="p">.</span><span class="n">permit</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">permit</span><span class="p">,</span> <span class="n">signature</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="allowancetransfer-eip-712-implementation">AllowanceTransfer EIP-712 Implementation</h4>
+
+<p>AllowanceTransfer uses specific EIP-712 structures for signature verification:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Type hashes used internally by permit2
+</span><span class="kt">bytes32</span> <span class="k">constant</span> <span class="n">PERMIT_DETAILS_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"PermitDetails(address token,uint160 amount,uint48 expiration,uint48 nonce)"</span>
+<span class="p">);</span>
+
+<span class="kt">bytes32</span> <span class="k">constant</span> <span class="n">PERMIT_SINGLE_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"PermitSingle(PermitDetails details,address spender,uint256 sigDeadline)PermitDetails(address token,uint160 amount,uint48 expiration,uint48 nonce)"</span>
+<span class="p">);</span>
+
+<span class="c1">// Your signature generation for AllowanceTransfer
+</span><span class="k">function</span> <span class="n">generateAllowanceSignature</span><span class="p">(</span>
+    <span class="n">PermitSingle</span> <span class="k">memory</span> <span class="n">permit</span><span class="p">,</span>
+    <span class="kt">uint256</span> <span class="n">privateKey</span>
+<span class="p">)</span> <span class="k">internal</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes</span> <span class="k">memory</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Hash the PermitDetails struct
+</span>    <span class="kt">bytes32</span> <span class="n">detailsHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">PERMIT_DETAILS_TYPEHASH</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">token</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">amount</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">expiration</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">nonce</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// Hash the main PermitSingle struct
+</span>    <span class="kt">bytes32</span> <span class="n">structHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">PERMIT_SINGLE_TYPEHASH</span><span class="p">,</span>
+        <span class="n">detailsHash</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">spender</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">sigDeadline</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// Create final EIP-712 hash
+</span>    <span class="kt">bytes32</span> <span class="n">hash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span>
+        <span class="s">"</span><span class="se">\x19\x01</span><span class="s">"</span><span class="p">,</span>
+        <span class="n">permit2</span><span class="p">.</span><span class="n">DOMAIN_SEPARATOR</span><span class="p">(),</span>
+        <span class="n">structHash</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// Sign and return
+</span>    <span class="p">(</span><span class="kt">uint8</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bytes32</span> <span class="n">r</span><span class="p">,</span> <span class="kt">bytes32</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="n">vm</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="n">privateKey</span><span class="p">,</span> <span class="n">hash</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="using-allowancetransfer-in-your-bug-bounty-contract">Using AllowanceTransfer in Your Bug Bounty Contract</h4>
+
+<p>Once permission is granted by a project team, your contract can transfer tokens to researchers using the familiar pattern:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">contract</span> <span class="n">BugBountyPlatform</span> <span class="p">{</span>
+    <span class="n">IPermit2</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">PERMIT2</span> <span class="o">=</span> <span class="n">IPermit2</span><span class="p">(</span><span class="mh">0x000000000022D473030F116dDEE9F6B43aC78BA3</span><span class="p">);</span>
+    
+    <span class="k">function</span> <span class="n">processRecurringBountyPayment</span><span class="p">(</span>
+        <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">,</span>
+        <span class="kt">address</span> <span class="n">researcher</span><span class="p">,</span>
+        <span class="kt">address</span> <span class="n">token</span><span class="p">,</span>
+        <span class="kt">uint160</span> <span class="n">amount</span><span class="p">,</span>
+        <span class="kt">string</span> <span class="k">calldata</span> <span class="n">bugId</span>
+    <span class="p">)</span> <span class="k">external</span> <span class="n">onlyAdmin</span> <span class="p">{</span>
+        <span class="c1">// Verify this project has valid permissions and researcher is eligible
+</span>        <span class="nb">require</span><span class="p">(</span><span class="n">authorizedProjects</span><span class="p">[</span><span class="n">projectTeam</span><span class="p">],</span> <span class="s">"Project not authorized"</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">verifiedResearchers</span><span class="p">[</span><span class="n">researcher</span><span class="p">],</span> <span class="s">"Researcher not verified"</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="o">!</span><span class="n">processedBugs</span><span class="p">[</span><span class="n">bugId</span><span class="p">],</span> <span class="s">"Bug already processed"</span><span class="p">);</span>
+        
+        <span class="c1">// Transfer tokens using existing AllowanceTransfer permission
+</span>        <span class="c1">// This will deduct from the project team's granted allowance
+</span>        <span class="n">PERMIT2</span><span class="p">.</span><span class="n">transferFrom</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">researcher</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+        
+        <span class="n">processedBugs</span><span class="p">[</span><span class="n">bugId</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">emit</span> <span class="n">BountyPaid</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">researcher</span><span class="p">,</span> <span class="n">bugId</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Batch processing for multiple researcher payments
+</span>    <span class="k">function</span> <span class="n">processBatchBountyPayments</span><span class="p">(</span>
+        <span class="n">IAllowanceTransfer</span><span class="p">.</span><span class="n">AllowanceTransferDetails</span><span class="p">[]</span> <span class="k">calldata</span> <span class="n">transfers</span>
+    <span class="p">)</span> <span class="k">external</span> <span class="n">onlyAdmin</span> <span class="p">{</span>
+        <span class="n">PERMIT2</span><span class="p">.</span><span class="n">transferFrom</span><span class="p">(</span><span class="n">transfers</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="ordered-nonce-management-in-allowancetransfer">Ordered Nonce Management in AllowanceTransfer</h4>
+
+<p>AllowanceTransfer uses ordered (sequential) nonces for each owner/token/spender combination:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Nonces must be used in order: 0, 1, 2, 3, ...
+// If nonce 2 is used, nonces 0 and 1 become invalid
+</span>
+<span class="k">function</span> <span class="n">getCurrentNonce</span><span class="p">(</span><span class="kt">address</span> <span class="n">projectTeam</span><span class="p">,</span> <span class="kt">address</span> <span class="n">token</span><span class="p">,</span> <span class="kt">address</span> <span class="n">spender</span><span class="p">)</span> 
+    <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint48</span> <span class="n">nonce</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">(,</span> <span class="p">,</span> <span class="n">nonce</span><span class="p">)</span> <span class="o">=</span> <span class="n">permit2</span><span class="p">.</span><span class="n">allowance</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">spender</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Project teams can invalidate future nonces if their key is compromised
+</span><span class="k">function</span> <span class="n">invalidateFutureNonces</span><span class="p">(</span><span class="kt">address</span> <span class="n">token</span><span class="p">,</span> <span class="kt">address</span> <span class="n">spender</span><span class="p">,</span> <span class="kt">uint48</span> <span class="n">newNonce</span><span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+    <span class="n">permit2</span><span class="p">.</span><span class="n">invalidateNonces</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">spender</span><span class="p">,</span> <span class="n">newNonce</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="signaturetransfer-direct-one-time-transfers">SignatureTransfer: Direct One-Time Transfers</h3>
+
+<p>SignatureTransfer enables direct token transfers without pre-existing approvals. Each signature authorizes a specific transfer amount to specific recipients.</p>
+
+<h4 id="core-data-structures-1">Core Data Structures</h4>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">TokenPermissions</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="n">token</span><span class="p">;</span>  <span class="c1">// The ERC20 token to transfer
+</span>    <span class="kt">uint256</span> <span class="n">amount</span><span class="p">;</span> <span class="c1">// Exact amount to transfer
+</span><span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">PermitTransferFrom</span> <span class="p">{</span>
+    <span class="n">TokenPermissions</span> <span class="n">permitted</span><span class="p">;</span> <span class="c1">// Token and amount details
+</span>    <span class="kt">uint256</span> <span class="n">nonce</span><span class="p">;</span>              <span class="c1">// Unordered nonce for replay protection
+</span>    <span class="kt">uint256</span> <span class="n">deadline</span><span class="p">;</span>           <span class="c1">// Transfer must occur before this time
+</span><span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">SignatureTransferDetails</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="n">to</span><span class="p">;</span>              <span class="c1">// Transfer recipient
+</span>    <span class="kt">uint256</span> <span class="n">requestedAmount</span><span class="p">;</span> <span class="c1">// Amount to actually transfer (≤ permitted amount)
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="how-signaturetransfer-works">How SignatureTransfer Works</h4>
+
+<p>Unlike AllowanceTransfer, SignatureTransfer doesn’t store any state. Each signature is self-contained and authorizes a direct transfer:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Project team signs permission for a specific bounty payment to a researcher
+</span><span class="n">PermitTransferFrom</span> <span class="k">memory</span> <span class="n">permit</span> <span class="o">=</span> <span class="n">PermitTransferFrom</span><span class="p">({</span>
+    <span class="n">permitted</span><span class="o">:</span> <span class="n">TokenPermissions</span><span class="p">({</span>
+        <span class="n">token</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">USDC</span><span class="p">),</span>
+        <span class="n">amount</span><span class="o">:</span> <span class="mi">5000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="c1">// Exactly 5,000 USDC
+</span>    <span class="p">}),</span>
+    <span class="n">nonce</span><span class="o">:</span> <span class="mi">12345678901234567890</span><span class="p">,</span> <span class="c1">// Unordered nonce
+</span>    <span class="n">deadline</span><span class="o">:</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="mi">1</span> <span class="kc">hours</span>
+<span class="p">});</span>
+
+<span class="n">SignatureTransferDetails</span> <span class="k">memory</span> <span class="n">transferDetails</span> <span class="o">=</span> <span class="n">SignatureTransferDetails</span><span class="p">({</span>
+    <span class="n">to</span><span class="o">:</span> <span class="n">researcher</span><span class="p">,</span>                <span class="c1">// Researcher receives the bounty
+</span>    <span class="n">requestedAmount</span><span class="o">:</span> <span class="mi">5000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>  <span class="c1">// Can be ≤ permitted amount
+</span><span class="p">});</span>
+
+<span class="c1">// Generate signature (covered in detail in Section 1)
+</span><span class="kt">bytes</span> <span class="k">memory</span> <span class="n">signature</span> <span class="o">=</span> <span class="n">generateSignatureTransferSignature</span><span class="p">(</span><span class="n">permit</span><span class="p">,</span> <span class="n">projectTeamPrivateKey</span><span class="p">);</span>
+
+<span class="c1">// Execute the transfer in one call, no pre-existing approvals needed
+</span><span class="n">permit2</span><span class="p">.</span><span class="n">permitTransferFrom</span><span class="p">(</span><span class="n">permit</span><span class="p">,</span> <span class="n">transferDetails</span><span class="p">,</span> <span class="n">projectTeam</span><span class="p">,</span> <span class="n">signature</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="signaturetransfer-eip-712-implementation">SignatureTransfer EIP-712 Implementation</h4>
+
+<p>SignatureTransfer has its own EIP-712 structures optimized for direct transfers:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Type hashes used internally by permit2
+</span><span class="kt">bytes32</span> <span class="k">constant</span> <span class="n">TOKEN_PERMISSIONS_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"TokenPermissions(address token,uint256 amount)"</span>
+<span class="p">);</span>
+
+<span class="kt">bytes32</span> <span class="k">constant</span> <span class="n">PERMIT_TRANSFER_FROM_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"PermitTransferFrom(TokenPermissions permitted,address spender,uint256 nonce,uint256 deadline)TokenPermissions(address token,uint256 amount)"</span>
+<span class="p">);</span>
+
+<span class="c1">// Your signature generation for SignatureTransfer
+</span><span class="k">function</span> <span class="n">generateSignatureTransferSignature</span><span class="p">(</span>
+    <span class="n">PermitTransferFrom</span> <span class="k">memory</span> <span class="n">permit</span><span class="p">,</span>
+    <span class="kt">address</span> <span class="n">spender</span><span class="p">,</span>
+    <span class="kt">uint256</span> <span class="n">privateKey</span>
+<span class="p">)</span> <span class="k">internal</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes</span> <span class="k">memory</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Hash TokenPermissions
+</span>    <span class="kt">bytes32</span> <span class="n">tokenPermissionsHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">TOKEN_PERMISSIONS_TYPEHASH</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">permitted</span><span class="p">.</span><span class="n">token</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">permitted</span><span class="p">.</span><span class="n">amount</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// Hash PermitTransferFrom
+</span>    <span class="kt">bytes32</span> <span class="n">structHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">PERMIT_TRANSFER_FROM_TYPEHASH</span><span class="p">,</span>
+        <span class="n">tokenPermissionsHash</span><span class="p">,</span>
+        <span class="n">spender</span><span class="p">,</span> <span class="c1">// Your contract address
+</span>        <span class="n">permit</span><span class="p">.</span><span class="n">nonce</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">deadline</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// Create final EIP-712 hash
+</span>    <span class="kt">bytes32</span> <span class="n">hash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span>
+        <span class="s">"</span><span class="se">\x19\x01</span><span class="s">"</span><span class="p">,</span>
+        <span class="n">permit2</span><span class="p">.</span><span class="n">DOMAIN_SEPARATOR</span><span class="p">(),</span>
+        <span class="n">structHash</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// Sign and return
+</span>    <span class="p">(</span><span class="kt">uint8</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bytes32</span> <span class="n">r</span><span class="p">,</span> <span class="kt">bytes32</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="n">vm</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="n">privateKey</span><span class="p">,</span> <span class="n">hash</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="unordered-nonce-management-in-signaturetransfer">Unordered Nonce Management in SignatureTransfer</h4>
+
+<p>SignatureTransfer uses a sophisticated bitmap-based nonce system that allows signatures to be used in any order:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Nonces are 256-bit values where:
+// - First 248 bits = word position in the bitmap
+// - Last 8 bits = bit position within that word
+</span>
+<span class="k">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="k">mapping</span><span class="p">(</span><span class="kt">uint256</span> <span class="o">=&gt;</span> <span class="kt">uint256</span><span class="p">))</span> <span class="k">public</span> <span class="n">nonceBitmap</span><span class="p">;</span>
+
+<span class="k">function</span> <span class="n">bitmapPositions</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">nonce</span><span class="p">)</span> <span class="k">private</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span> <span class="n">wordPos</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">bitPos</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">wordPos</span> <span class="o">=</span> <span class="kt">uint248</span><span class="p">(</span><span class="n">nonce</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// First 248 bits
+</span>    <span class="n">bitPos</span> <span class="o">=</span> <span class="kt">uint8</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>         <span class="c1">// Last 8 bits
+</span><span class="p">}</span>
+
+<span class="c1">// Project teams can invalidate specific nonces using a bitmask
+</span><span class="k">function</span> <span class="n">invalidateUnorderedNonces</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">wordPos</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">mask</span><span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+    <span class="n">nonceBitmap</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">][</span><span class="n">wordPos</span><span class="p">]</span> <span class="o">|=</span> <span class="n">mask</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This system provides incredible flexibility - project teams can:</p>
+<ul>
+  <li>Use signatures in any order</li>
+  <li>Invalidate specific ranges of nonces</li>
+  <li>Generate nonces with custom strategies</li>
+</ul>
+
+<h3 id="batch-operations-maximum-efficiency">Batch Operations: Maximum Efficiency</h3>
+
+<p>Both systems support batching to minimize gas costs and enable complex operations:</p>
+
+<h4 id="allowancetransfer-batch">AllowanceTransfer Batch</h4>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Project team grants permissions for multiple token bounty pools in one transaction
+</span><span class="n">IAllowanceTransfer</span><span class="p">.</span><span class="n">PermitBatch</span> <span class="k">memory</span> <span class="n">batchPermit</span> <span class="o">=</span> <span class="n">IAllowanceTransfer</span><span class="p">.</span><span class="n">PermitBatch</span><span class="p">({</span>
+    <span class="n">details</span><span class="o">:</span> <span class="p">[</span>
+        <span class="n">IAllowanceTransfer</span><span class="p">.</span><span class="n">PermitDetails</span><span class="p">({</span>
+            <span class="n">token</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">USDC</span><span class="p">),</span>
+            <span class="n">amount</span><span class="o">:</span> <span class="mi">10000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">expiration</span><span class="o">:</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="mi">30</span> <span class="kc">days</span><span class="p">,</span>
+            <span class="n">nonce</span><span class="o">:</span> <span class="n">getCurrentNonce</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">USDC</span><span class="p">,</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">))</span>
+        <span class="p">}),</span>
+        <span class="n">IAllowanceTransfer</span><span class="p">.</span><span class="n">PermitDetails</span><span class="p">({</span>
+            <span class="n">token</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">DAI</span><span class="p">),</span>
+            <span class="n">amount</span><span class="o">:</span> <span class="mi">5000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">18</span><span class="p">,</span>
+            <span class="n">expiration</span><span class="o">:</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="mi">30</span> <span class="kc">days</span><span class="p">,</span>
+            <span class="n">nonce</span><span class="o">:</span> <span class="n">getCurrentNonce</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">DAI</span><span class="p">,</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">))</span>
+        <span class="p">})</span>
+    <span class="p">],</span>
+    <span class="n">spender</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">),</span>
+    <span class="n">sigDeadline</span><span class="o">:</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="mi">1</span> <span class="kc">hours</span>
+<span class="p">});</span>
+
+<span class="c1">// Single signature grants permissions for multiple token bounty pools
+</span><span class="n">permit2</span><span class="p">.</span><span class="n">permit</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">batchPermit</span><span class="p">,</span> <span class="n">signature</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="signaturetransfer-batch">SignatureTransfer Batch</h4>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Project team authorizes bounty payments to multiple researchers in one transaction
+</span><span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">PermitBatchTransferFrom</span> <span class="k">memory</span> <span class="n">batchPermit</span> <span class="o">=</span> 
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">PermitBatchTransferFrom</span><span class="p">({</span>
+        <span class="n">permitted</span><span class="o">:</span> <span class="p">[</span>
+            <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">TokenPermissions</span><span class="p">({</span><span class="n">token</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">USDC</span><span class="p">),</span> <span class="n">amount</span><span class="o">:</span> <span class="mi">5000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">}),</span>
+            <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">TokenPermissions</span><span class="p">({</span><span class="n">token</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">DAI</span><span class="p">),</span> <span class="n">amount</span><span class="o">:</span> <span class="mi">3000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">18</span><span class="p">})</span>
+        <span class="p">],</span>
+        <span class="n">nonce</span><span class="o">:</span> <span class="n">generateUnorderedNonce</span><span class="p">(),</span>
+        <span class="n">deadline</span><span class="o">:</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">+</span> <span class="mi">1</span> <span class="kc">hours</span>
+    <span class="p">});</span>
+
+<span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">SignatureTransferDetails</span><span class="p">[]</span> <span class="k">memory</span> <span class="n">transferDetails</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">SignatureTransferDetails</span><span class="p">({</span><span class="n">to</span><span class="o">:</span> <span class="n">researcherA</span><span class="p">,</span> <span class="n">requestedAmount</span><span class="o">:</span> <span class="mi">5000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">}),</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">SignatureTransferDetails</span><span class="p">({</span><span class="n">to</span><span class="o">:</span> <span class="n">researcherB</span><span class="p">,</span> <span class="n">requestedAmount</span><span class="o">:</span> <span class="mi">3000</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">18</span><span class="p">})</span>
+<span class="p">];</span>
+
+<span class="c1">// Single signature authorizes multiple bounty payments to different researchers
+</span><span class="n">permit2</span><span class="p">.</span><span class="n">permitTransferFrom</span><span class="p">(</span><span class="n">batchPermit</span><span class="p">,</span> <span class="n">transferDetails</span><span class="p">,</span> <span class="n">projectTeam</span><span class="p">,</span> <span class="n">signature</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="permit2s-eip-712-domain-setup">Permit2’s EIP-712 Domain Setup</h3>
+
+<p>Permit2 uses a carefully designed EIP-712 domain that’s consistent across all chains:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">contract</span> <span class="n">EIP712</span> <span class="k">is</span> <span class="n">IEIP712</span> <span class="p">{</span>
+    <span class="kt">bytes32</span> <span class="k">private</span> <span class="k">constant</span> <span class="n">_HASHED_NAME</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">"Permit2"</span><span class="p">);</span>
+    <span class="kt">bytes32</span> <span class="k">private</span> <span class="k">constant</span> <span class="n">_TYPE_HASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+        <span class="s">"EIP712Domain(string name,uint256 chainId,address verifyingContract)"</span>
+    <span class="p">);</span>
+    
+    <span class="c1">// Domain separator is cached but recalculated if chain ID changes (for forks)
+</span>    <span class="k">function</span> <span class="n">DOMAIN_SEPARATOR</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes32</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">block</span><span class="p">.</span><span class="n">chainid</span> <span class="o">==</span> <span class="n">_CACHED_CHAIN_ID</span>
+            <span class="o">?</span> <span class="n">_CACHED_DOMAIN_SEPARATOR</span>
+            <span class="o">:</span> <span class="n">_buildDomainSeparator</span><span class="p">(</span><span class="n">_TYPE_HASH</span><span class="p">,</span> <span class="n">_HASHED_NAME</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">function</span> <span class="n">_buildDomainSeparator</span><span class="p">(</span><span class="kt">bytes32</span> <span class="n">typeHash</span><span class="p">,</span> <span class="kt">bytes32</span> <span class="n">nameHash</span><span class="p">)</span> <span class="k">private</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes32</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">typeHash</span><span class="p">,</span> <span class="n">nameHash</span><span class="p">,</span> <span class="n">block</span><span class="p">.</span><span class="n">chainid</span><span class="p">,</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">)));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This setup ensures:</p>
+<ul>
+  <li>
+<strong>Cross-chain consistency</strong>: Same permit2 address and domain on all chains</li>
+  <li>
+<strong>Fork protection</strong>: Domain separator updates automatically on chain forks</li>
+  <li>
+<strong>Version compatibility</strong>: Clear name and no version field for maximum compatibility</li>
+</ul>
+
+<h3 id="security-considerations-and-error-handling">Security Considerations and Error Handling</h3>
+
+<p>Permit2 implements comprehensive security measures that your bug bounty platform should understand:</p>
+
+<h4 id="time-based-protections">Time-based Protections</h4>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// All permits include deadline checks
+</span><span class="k">if</span> <span class="p">(</span><span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">&gt;</span> <span class="n">permit</span><span class="p">.</span><span class="n">deadline</span><span class="p">)</span> <span class="nb">revert</span> <span class="n">SignatureExpired</span><span class="p">(</span><span class="n">permit</span><span class="p">.</span><span class="n">deadline</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">&gt;</span> <span class="n">permitSingle</span><span class="p">.</span><span class="n">sigDeadline</span><span class="p">)</span> <span class="nb">revert</span> <span class="n">SignatureExpired</span><span class="p">(</span><span class="n">permitSingle</span><span class="p">.</span><span class="n">sigDeadline</span><span class="p">);</span>
+
+<span class="c1">// AllowanceTransfer permissions can expire
+</span><span class="k">if</span> <span class="p">(</span><span class="n">block</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">&gt;</span> <span class="n">allowed</span><span class="p">.</span><span class="n">expiration</span><span class="p">)</span> <span class="nb">revert</span> <span class="n">AllowanceExpired</span><span class="p">(</span><span class="n">allowed</span><span class="p">.</span><span class="n">expiration</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="amount-validations">Amount Validations</h4>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SignatureTransfer enforces exact amount limits
+</span><span class="k">if</span> <span class="p">(</span><span class="n">requestedAmount</span> <span class="o">&gt;</span> <span class="n">permit</span><span class="p">.</span><span class="n">permitted</span><span class="p">.</span><span class="n">amount</span><span class="p">)</span> <span class="nb">revert</span> <span class="n">InvalidAmount</span><span class="p">(</span><span class="n">permit</span><span class="p">.</span><span class="n">permitted</span><span class="p">.</span><span class="n">amount</span><span class="p">);</span>
+
+<span class="c1">// AllowanceTransfer tracks and decrements balances
+</span><span class="k">if</span> <span class="p">(</span><span class="n">amount</span> <span class="o">&gt;</span> <span class="n">maxAmount</span><span class="p">)</span> <span class="nb">revert</span> <span class="n">InsufficientAllowance</span><span class="p">(</span><span class="n">maxAmount</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="nonce-based-replay-protection">Nonce-based Replay Protection</h4>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// AllowanceTransfer: ordered nonces
+</span><span class="k">if</span> <span class="p">(</span><span class="n">allowed</span><span class="p">.</span><span class="n">nonce</span> <span class="o">!=</span> <span class="n">nonce</span><span class="p">)</span> <span class="nb">revert</span> <span class="n">InvalidNonce</span><span class="p">();</span>
+
+<span class="c1">// SignatureTransfer: bitmap-based unordered nonces
+</span><span class="k">function</span> <span class="n">_useUnorderedNonce</span><span class="p">(</span><span class="kt">address</span> <span class="n">from</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">nonce</span><span class="p">)</span> <span class="k">internal</span> <span class="p">{</span>
+    <span class="p">(</span><span class="kt">uint256</span> <span class="n">wordPos</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">bitPos</span><span class="p">)</span> <span class="o">=</span> <span class="n">bitmapPositions</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>
+    <span class="kt">uint256</span> <span class="n">bit</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bitPos</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">flipped</span> <span class="o">=</span> <span class="n">nonceBitmap</span><span class="p">[</span><span class="n">from</span><span class="p">][</span><span class="n">wordPos</span><span class="p">]</span> <span class="o">^=</span> <span class="n">bit</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">flipped</span> <span class="o">&amp;</span> <span class="n">bit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="nb">revert</span> <span class="n">InvalidNonce</span><span class="p">();</span> <span class="c1">// Nonce already used
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="emergency-features">Emergency Features</h3>
+
+<p>Permit2 includes emergency functions for compromised accounts:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// AllowanceTransfer: Revoke all approvals immediately
+</span><span class="n">IAllowanceTransfer</span><span class="p">.</span><span class="n">TokenSpenderPair</span><span class="p">[]</span> <span class="k">memory</span> <span class="n">revokeList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IAllowanceTransfer</span><span class="p">.</span><span class="n">TokenSpenderPair</span><span class="p">[](</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">revokeList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">IAllowanceTransfer</span><span class="p">.</span><span class="n">TokenSpenderPair</span><span class="p">({</span><span class="n">token</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">USDC</span><span class="p">),</span> <span class="n">spender</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">bugBountyContract</span><span class="p">)});</span>
+<span class="n">revokeList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">IAllowanceTransfer</span><span class="p">.</span><span class="n">TokenSpenderPair</span><span class="p">({</span><span class="n">token</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">DAI</span><span class="p">),</span> <span class="n">spender</span><span class="o">:</span> <span class="kt">address</span><span class="p">(</span><span class="n">bugBountyContract</span><span class="p">)});</span>
+
+<span class="n">permit2</span><span class="p">.</span><span class="n">lockdown</span><span class="p">(</span><span class="n">revokeList</span><span class="p">);</span> <span class="c1">// Sets allowance amounts to 0 for all specified token/spender pairs
+</span>
+<span class="c1">// SignatureTransfer: Invalidate ranges of nonces
+</span><span class="n">permit2</span><span class="p">.</span><span class="n">invalidateUnorderedNonces</span><span class="p">(</span><span class="n">wordPos</span><span class="p">,</span> <span class="n">mask</span><span class="p">);</span> <span class="c1">// Invalidates specific nonces using bitmap
+</span></code></pre></div></div>
+
+<h3 id="gas-efficiency-benefits">Gas Efficiency Benefits</h3>
+
+<p>Permit2 provides significant gas savings for your bug bounty platform by reducing transaction overhead and enabling batch operations:</p>
+
+<h4 id="traditional-approach-vs-permit2">Traditional Approach vs Permit2</h4>
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Traditional: Two separate transactions required
+// Transaction 1: Project team approves contract (gas cost varies by token)
+</span><span class="n">USDC</span><span class="p">.</span><span class="n">approve</span><span class="p">(</span><span class="n">bugBountyContract</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+
+<span class="c1">// Transaction 2: Contract processes bounty payment
+</span><span class="n">bugBountyContract</span><span class="p">.</span><span class="n">claimBounty</span><span class="p">(</span><span class="n">bugId</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+
+<span class="c1">// Total: 2 transactions + 2 transaction fees
+</span></code></pre></div></div>
+
+<h4 id="permit2-approach">Permit2 Approach</h4>
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Single transaction: Project team signs permit off-chain, anyone can execute
+</span><span class="n">bugBountyContract</span><span class="p">.</span><span class="n">claimBountyWithPermit</span><span class="p">(</span><span class="n">permit</span><span class="p">,</span> <span class="n">signature</span><span class="p">,</span> <span class="n">bugId</span><span class="p">);</span>
+
+<span class="c1">// Total: 1 transaction + 1 transaction fee
+</span></code></pre></div></div>
+
+<h4 id="batch-operations-provide-maximum-efficiency">Batch Operations Provide Maximum Efficiency</h4>
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Process multiple bug bounty payments in a single transaction:
+// Traditional: N separate approve + transfer transactions
+// Permit2 batch: 1 transaction processing N transfers
+</span>
+<span class="c1">// Significant gas savings scale with batch size
+</span><span class="n">PERMIT2</span><span class="p">.</span><span class="n">permitTransferFrom</span><span class="p">(</span><span class="n">batchPermit</span><span class="p">,</span> <span class="n">transferDetails</span><span class="p">,</span> <span class="n">projectTeam</span><span class="p">,</span> <span class="n">signature</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The gas savings become more pronounced with larger batch sizes and frequent operations, making permit2 ideal for platforms processing multiple payments regularly.</p>
+
+<h3 id="integration-example-complete-bug-bounty-flow">Integration Example: Complete Bug Bounty Flow</h3>
+
+<p>Here’s how your bug bounty platform would integrate both permit2 systems:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">contract</span> <span class="n">BugBountyPlatform</span> <span class="p">{</span>
+    <span class="n">IPermit2</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">PERMIT2</span> <span class="o">=</span> <span class="n">IPermit2</span><span class="p">(</span><span class="mh">0x000000000022D473030F116dDEE9F6B43aC78BA3</span><span class="p">);</span>
+    
+    <span class="c1">// For ongoing projects with recurring researcher payments (use AllowanceTransfer)
+</span>    <span class="k">function</span> <span class="n">setupProjectBountyPool</span><span class="p">(</span>
+        <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">,</span>
+        <span class="n">IAllowanceTransfer</span><span class="p">.</span><span class="n">PermitSingle</span> <span class="k">calldata</span> <span class="n">permit</span><span class="p">,</span>
+        <span class="kt">bytes</span> <span class="k">calldata</span> <span class="n">signature</span>
+    <span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+        <span class="c1">// Verify project eligibility
+</span>        <span class="nb">require</span><span class="p">(</span><span class="n">verifiedProjects</span><span class="p">[</span><span class="n">projectTeam</span><span class="p">],</span> <span class="s">"Project not verified"</span><span class="p">);</span>
+        
+        <span class="c1">// Grant permission for the platform to distribute bounty payments
+</span>        <span class="n">PERMIT2</span><span class="p">.</span><span class="n">permit</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">permit</span><span class="p">,</span> <span class="n">signature</span><span class="p">);</span>
+        
+        <span class="n">projectBountyPools</span><span class="p">[</span><span class="n">projectTeam</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">emit</span> <span class="n">BountyPoolSetup</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">permit</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">token</span><span class="p">,</span> <span class="n">permit</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">amount</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// For one-time vulnerability bounty payments (use SignatureTransfer)
+</span>    <span class="k">function</span> <span class="n">processBountyWithSignature</span><span class="p">(</span>
+        <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">PermitTransferFrom</span> <span class="k">calldata</span> <span class="n">permit</span><span class="p">,</span>
+        <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">SignatureTransferDetails</span> <span class="k">calldata</span> <span class="n">transferDetails</span><span class="p">,</span>
+        <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">,</span>
+        <span class="kt">bytes</span> <span class="k">calldata</span> <span class="n">signature</span><span class="p">,</span>
+        <span class="kt">string</span> <span class="k">calldata</span> <span class="n">bugId</span><span class="p">,</span>
+        <span class="kt">string</span> <span class="k">calldata</span> <span class="n">vulnerabilityDescription</span>
+    <span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+        <span class="c1">// Verify the vulnerability claim and project authorization
+</span>        <span class="nb">require</span><span class="p">(</span><span class="o">!</span><span class="n">processedBugs</span><span class="p">[</span><span class="n">bugId</span><span class="p">],</span> <span class="s">"Bug already processed"</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">verifiedProjects</span><span class="p">[</span><span class="n">projectTeam</span><span class="p">],</span> <span class="s">"Project not verified"</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">verifiedResearchers</span><span class="p">[</span><span class="n">transferDetails</span><span class="p">.</span><span class="n">to</span><span class="p">],</span> <span class="s">"Researcher not verified"</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">validateVulnerability</span><span class="p">(</span><span class="n">bugId</span><span class="p">,</span> <span class="n">vulnerabilityDescription</span><span class="p">),</span> <span class="s">"Invalid vulnerability"</span><span class="p">);</span>
+        
+        <span class="c1">// Execute the token transfer using SignatureTransfer from project to researcher
+</span>        <span class="n">PERMIT2</span><span class="p">.</span><span class="n">permitTransferFrom</span><span class="p">(</span><span class="n">permit</span><span class="p">,</span> <span class="n">transferDetails</span><span class="p">,</span> <span class="n">projectTeam</span><span class="p">,</span> <span class="n">signature</span><span class="p">);</span>
+        
+        <span class="c1">// Record the bounty payment
+</span>        <span class="n">processedBugs</span><span class="p">[</span><span class="n">bugId</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">bugReports</span><span class="p">[</span><span class="n">bugId</span><span class="p">]</span> <span class="o">=</span> <span class="n">BugReport</span><span class="p">({</span>
+            <span class="n">projectTeam</span><span class="o">:</span> <span class="n">projectTeam</span><span class="p">,</span>
+            <span class="n">researcher</span><span class="o">:</span> <span class="n">transferDetails</span><span class="p">.</span><span class="n">to</span><span class="p">,</span>
+            <span class="n">amount</span><span class="o">:</span> <span class="n">transferDetails</span><span class="p">.</span><span class="n">requestedAmount</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">:</span> <span class="n">vulnerabilityDescription</span><span class="p">,</span>
+            <span class="n">timestamp</span><span class="o">:</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span>
+        <span class="p">});</span>
+        
+        <span class="k">emit</span> <span class="n">BountyPaid</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">transferDetails</span><span class="p">.</span><span class="n">to</span><span class="p">,</span> <span class="n">bugId</span><span class="p">,</span> <span class="n">transferDetails</span><span class="p">.</span><span class="n">requestedAmount</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="choosing-between-allowancetransfer-and-signaturetransfer">Choosing Between AllowanceTransfer and SignatureTransfer</h3>
+
+<p>For your bug bounty platform, choose based on the use case:</p>
+
+<p><strong>Use AllowanceTransfer when:</strong></p>
+<ul>
+  <li>Setting up ongoing bounty pools for verified projects</li>
+  <li>Processing recurring payments to multiple researchers</li>
+  <li>Projects need persistent permissions that don’t require re-signing for each payout</li>
+  <li>Gas efficiency for multiple researcher payments is crucial</li>
+</ul>
+
+<p><strong>Use SignatureTransfer when:</strong></p>
+<ul>
+  <li>Processing one-time vulnerability bounty payments</li>
+  <li>Each payment requires fresh project authorization</li>
+  <li>You want to include additional context data (witness data - covered in Section 3)</li>
+  <li>Maximum security with no persistent state</li>
+</ul>
+
+<h3 id="best-practices-for-bug-bounty-platforms">Best Practices for Bug Bounty Platforms</h3>
+
+<ol>
+  <li>
+<strong>Deadline Management</strong>: Always set reasonable deadlines (1-24 hours for signatures)</li>
+  <li>
+<strong>Amount Validation</strong>: Verify amounts match your bounty scales</li>
+  <li>
+<strong>Nonce Strategies</strong>: Use sequential nonces for predictable workflows, bitmap nonces for flexibility</li>
+  <li>
+<strong>Batch Operations</strong>: Group related transfers to minimize gas costs</li>
+  <li>
+<strong>Emergency Procedures</strong>: Implement lockdown mechanisms for compromised researchers</li>
+  <li>
+<strong>Signature Verification</strong>: Always validate signatures before processing claims</li>
+</ol>
+
+<p>Permit2 provides the foundation for building sophisticated, gas-efficient, and user-friendly token permission systems. In the next section, we’ll explore witness transfers, which are permit2’s most powerful feature that allows you to bind custom logic directly to token transfers.</p>
+
+<h2 id="permit2-witness-transfers-adding-custom-logic">Permit2 Witness Transfers: Adding Custom Logic</h2>
+
+<h3 id="what-are-witness-transfers">What are Witness Transfers?</h3>
+
+<p>Witness transfers are permit2’s most powerful feature, allowing you to bind <strong>custom protocol logic directly to token transfers</strong> with a <strong>single</strong> signature. Instead of just transferring tokens, you can include additional structured data that gets verified as part of the signature, enabling sophisticated workflows that combine token movements with contract logic.</p>
+
+<p>For your bug bounty platform, witness transfers unlock scenarios like:</p>
+<ul>
+  <li>
+<strong>Vulnerability Verification</strong>: Bind bounty payments to specific vulnerability details</li>
+  <li>
+<strong>Multi-step Payouts</strong>: Coordinate complex payout logic with token transfers</li>
+  <li>
+<strong>Automated Escrow</strong>: Release payments when conditions are met</li>
+  <li>
+<strong>Audit Trail</strong>: Include immutable metadata with every bounty payment</li>
+</ul>
+
+<h3 id="the-problem-witness-transfers-solve">The Problem Witness Transfers Solve</h3>
+
+<p>Traditional permit2 transfers can move tokens efficiently, but they lack context. Consider this limitation:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Basic SignatureTransfer: Moves 1000 USDC to researcher
+// But doesn't verify WHAT the payment is for
+</span><span class="n">permit2</span><span class="p">.</span><span class="n">permitTransferFrom</span><span class="p">(</span><span class="n">permit</span><span class="p">,</span> <span class="n">transferDetails</span><span class="p">,</span> <span class="n">projectTeam</span><span class="p">,</span> <span class="n">signature</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>With witness transfers, you can include rich context:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Witness Transfer: Moves 1000 USDC AND verifies vulnerability details
+</span><span class="n">permit2</span><span class="p">.</span><span class="n">permitWitnessTransferFrom</span><span class="p">(</span><span class="n">permit</span><span class="p">,</span> <span class="n">transferDetails</span><span class="p">,</span> <span class="n">projectTeam</span><span class="p">,</span> <span class="n">vulnerabilityHash</span><span class="p">,</span> <span class="n">witnessTypeString</span><span class="p">,</span> <span class="n">signature</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This ensures that project teams can only authorize payments for legitimate, verified vulnerabilities, not arbitrary transfers.</p>
+
+<h3 id="witness-transfer-fundamentals">Witness Transfer Fundamentals</h3>
+
+<p>Witness transfers extend the standard permit2 EIP-712 structure by adding a custom data hash:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Standard Permit: PermitTransferFrom(TokenPermissions, spender, nonce, deadline)
+Witness Permit:  PermitWitnessTransferFrom(TokenPermissions, spender, nonce, deadline, WitnessHash)
+</code></pre></div></div>
+
+<p>The witness hash is computed from your custom struct using the same EIP-712 patterns from Section 1:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bytes32</span> <span class="n">witnessHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">WITNESS_TYPEHASH</span><span class="p">,</span> <span class="p">...</span><span class="n">witnessData</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h3 id="basic-witness-implementation-vulnerability-verification">Basic Witness Implementation: Vulnerability Verification</h3>
+
+<p>Let’s start with a simple vulnerability verification system:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">contract</span> <span class="n">BugBountyPlatform</span> <span class="p">{</span>
+    <span class="n">IPermit2</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">PERMIT2</span> <span class="o">=</span> <span class="n">IPermit2</span><span class="p">(</span><span class="mh">0x000000000022D473030F116dDEE9F6B43aC78BA3</span><span class="p">);</span>
+    
+    <span class="k">struct</span> <span class="n">VulnerabilityReport</span> <span class="p">{</span>
+        <span class="kt">address</span> <span class="n">researcher</span><span class="p">;</span>
+        <span class="kt">string</span> <span class="n">bugId</span><span class="p">;</span>
+        <span class="kt">uint8</span> <span class="n">severity</span><span class="p">;</span>
+        <span class="kt">string</span> <span class="n">description</span><span class="p">;</span>
+        <span class="kt">uint256</span> <span class="n">bountyAmount</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="kt">bytes32</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">VULNERABILITY_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+        <span class="s">"VulnerabilityReport(address researcher,string bugId,uint8 severity,string description,uint256 bountyAmount)"</span>
+    <span class="p">);</span>
+    
+    <span class="k">mapping</span><span class="p">(</span><span class="kt">string</span> <span class="o">=&gt;</span> <span class="kt">bool</span><span class="p">)</span> <span class="k">public</span> <span class="n">processedVulnerabilities</span><span class="p">;</span>
+    
+    <span class="k">function</span> <span class="n">processBountyWithWitness</span><span class="p">(</span>
+        <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">PermitTransferFrom</span> <span class="k">calldata</span> <span class="n">permit</span><span class="p">,</span>
+        <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">SignatureTransferDetails</span> <span class="k">calldata</span> <span class="n">transferDetails</span><span class="p">,</span>
+        <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">,</span>
+        <span class="n">VulnerabilityReport</span> <span class="k">calldata</span> <span class="n">vulnerability</span><span class="p">,</span>
+        <span class="kt">bytes</span> <span class="k">calldata</span> <span class="n">signature</span>
+    <span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+        <span class="c1">// Verify vulnerability hasn't been processed
+</span>        <span class="nb">require</span><span class="p">(</span><span class="o">!</span><span class="n">processedVulnerabilities</span><span class="p">[</span><span class="n">vulnerability</span><span class="p">.</span><span class="n">bugId</span><span class="p">],</span> <span class="s">"Bug already processed"</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">vulnerability</span><span class="p">.</span><span class="n">researcher</span> <span class="o">==</span> <span class="n">transferDetails</span><span class="p">.</span><span class="n">to</span><span class="p">,</span> <span class="s">"Researcher mismatch"</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">vulnerability</span><span class="p">.</span><span class="n">bountyAmount</span> <span class="o">==</span> <span class="n">transferDetails</span><span class="p">.</span><span class="n">requestedAmount</span><span class="p">,</span> <span class="s">"Amount mismatch"</span><span class="p">);</span>
+        
+        <span class="c1">// Generate witness hash from vulnerability data
+</span>        <span class="kt">bytes32</span> <span class="n">witnessHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+            <span class="n">VULNERABILITY_TYPEHASH</span><span class="p">,</span>
+            <span class="n">vulnerability</span><span class="p">.</span><span class="n">researcher</span><span class="p">,</span>
+            <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">vulnerability</span><span class="p">.</span><span class="n">bugId</span><span class="p">)),</span>       <span class="c1">// Dynamic type: hash first
+</span>            <span class="n">vulnerability</span><span class="p">.</span><span class="n">severity</span><span class="p">,</span>
+            <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">vulnerability</span><span class="p">.</span><span class="n">description</span><span class="p">)),</span> <span class="c1">// Dynamic type: hash first
+</span>            <span class="n">vulnerability</span><span class="p">.</span><span class="n">bountyAmount</span>
+        <span class="p">));</span>
+        
+        <span class="c1">// Create witness type string (critical formatting!)
+</span>        <span class="kt">string</span> <span class="k">memory</span> <span class="n">witnessTypeString</span> <span class="o">=</span> 
+            <span class="s">"VulnerabilityReport witness)VulnerabilityReport(address researcher,string bugId,uint8 severity,string description,uint256 bountyAmount)TokenPermissions(address token,uint256 amount)"</span><span class="p">;</span>
+        
+        <span class="c1">// Execute witness transfer, this verifies both token permission AND vulnerability data
+</span>        <span class="n">PERMIT2</span><span class="p">.</span><span class="n">permitWitnessTransferFrom</span><span class="p">(</span>
+            <span class="n">permit</span><span class="p">,</span>
+            <span class="n">transferDetails</span><span class="p">,</span>
+            <span class="n">projectTeam</span><span class="p">,</span>
+            <span class="n">witnessHash</span><span class="p">,</span>
+            <span class="n">witnessTypeString</span><span class="p">,</span>
+            <span class="n">signature</span>
+        <span class="p">);</span>
+        
+        <span class="c1">// Mark vulnerability as processed
+</span>        <span class="n">processedVulnerabilities</span><span class="p">[</span><span class="n">vulnerability</span><span class="p">.</span><span class="n">bugId</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        
+        <span class="k">emit</span> <span class="n">BountyPaid</span><span class="p">(</span><span class="n">projectTeam</span><span class="p">,</span> <span class="n">vulnerability</span><span class="p">.</span><span class="n">researcher</span><span class="p">,</span> <span class="n">vulnerability</span><span class="p">.</span><span class="n">bugId</span><span class="p">,</span> <span class="n">vulnerability</span><span class="p">.</span><span class="n">bountyAmount</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="witness-type-string-the-critical-component">Witness Type String: The Critical Component</h3>
+
+<p>The witness type string is <strong>the most error-prone part</strong> of witness transfers. It must follow exact formatting rules:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"{WitnessType} witness){WitnessType}({fields}){NestedType1}({fields}){NestedType2}({fields})TokenPermissions(address token,uint256 amount)"
+</code></pre></div></div>
+
+<p><strong>Critical formatting rules:</strong></p>
+<ol>
+  <li>Starts with witness type name followed by “ witness)”</li>
+  <li>Complete witness struct definition</li>
+  <li>ALL referenced structs in <strong>alphabetical order</strong>
+</li>
+  <li>
+<strong>TokenPermissions must always be included</strong> (it’s part of the permit2 structure)</li>
+  <li>No extra spaces, exact field names and types</li>
+  <li>Dynamic types (string, bytes) included in type definition but hashed in data</li>
+</ol>
+
+<h3 id="advanced-witness-nested-structs">Advanced Witness: Nested Structs</h3>
+
+<p>Building on Section 1’s nested struct patterns, let’s create a more sophisticated vulnerability system:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">VulnerabilityDetails</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="n">bugId</span><span class="p">;</span>
+    <span class="kt">uint8</span> <span class="n">severity</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">description</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">PaymentTerms</span> <span class="p">{</span>
+    <span class="kt">uint256</span> <span class="n">amount</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">deadline</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">requiresApproval</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">ComplexVulnerabilityReport</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="n">researcher</span><span class="p">;</span>
+    <span class="n">VulnerabilityDetails</span> <span class="n">details</span><span class="p">;</span>
+    <span class="n">PaymentTerms</span> <span class="n">terms</span><span class="p">;</span>
+    <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Type hashes for each struct (alphabetical order matters!)
+</span><span class="kt">bytes32</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">PAYMENT_TERMS_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"PaymentTerms(uint256 amount,uint256 deadline,bool requiresApproval)"</span>
+<span class="p">);</span>
+
+<span class="kt">bytes32</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">VULNERABILITY_DETAILS_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"VulnerabilityDetails(string bugId,uint8 severity,string description)"</span>
+<span class="p">);</span>
+
+<span class="kt">bytes32</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">COMPLEX_VULNERABILITY_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"ComplexVulnerabilityReport(address researcher,VulnerabilityDetails details,PaymentTerms terms,address projectTeam)PaymentTerms(uint256 amount,uint256 deadline,bool requiresApproval)VulnerabilityDetails(string bugId,uint8 severity,string description)"</span>
+<span class="p">);</span>
+
+<span class="k">function</span> <span class="n">processComplexBounty</span><span class="p">(</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">PermitTransferFrom</span> <span class="k">calldata</span> <span class="n">permit</span><span class="p">,</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">SignatureTransferDetails</span> <span class="k">calldata</span> <span class="n">transferDetails</span><span class="p">,</span>
+    <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">,</span>
+    <span class="n">ComplexVulnerabilityReport</span> <span class="k">calldata</span> <span class="n">report</span><span class="p">,</span>
+    <span class="kt">bytes</span> <span class="k">calldata</span> <span class="n">signature</span>
+<span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+    <span class="c1">// Validation logic...
+</span>    
+    <span class="c1">// Hash nested structs first
+</span>    <span class="kt">bytes32</span> <span class="n">detailsHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">VULNERABILITY_DETAILS_TYPEHASH</span><span class="p">,</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">report</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">bugId</span><span class="p">)),</span>
+        <span class="n">report</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">severity</span><span class="p">,</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">report</span><span class="p">.</span><span class="n">details</span><span class="p">.</span><span class="n">description</span><span class="p">))</span>
+    <span class="p">));</span>
+    
+    <span class="kt">bytes32</span> <span class="n">termsHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">PAYMENT_TERMS_TYPEHASH</span><span class="p">,</span>
+        <span class="n">report</span><span class="p">.</span><span class="n">terms</span><span class="p">.</span><span class="n">amount</span><span class="p">,</span>
+        <span class="n">report</span><span class="p">.</span><span class="n">terms</span><span class="p">.</span><span class="n">deadline</span><span class="p">,</span>
+        <span class="n">report</span><span class="p">.</span><span class="n">terms</span><span class="p">.</span><span class="n">requiresApproval</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// Hash main struct using nested struct hashes
+</span>    <span class="kt">bytes32</span> <span class="n">witnessHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">COMPLEX_VULNERABILITY_TYPEHASH</span><span class="p">,</span>
+        <span class="n">report</span><span class="p">.</span><span class="n">researcher</span><span class="p">,</span>
+        <span class="n">detailsHash</span><span class="p">,</span> <span class="c1">// Use hash, not raw struct
+</span>        <span class="n">termsHash</span><span class="p">,</span>   <span class="c1">// Use hash, not raw struct
+</span>        <span class="n">report</span><span class="p">.</span><span class="n">projectTeam</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// Type string with all structs in alphabetical order
+</span>    <span class="kt">string</span> <span class="k">memory</span> <span class="n">witnessTypeString</span> <span class="o">=</span> 
+        <span class="s">"ComplexVulnerabilityReport witness)ComplexVulnerabilityReport(address researcher,VulnerabilityDetails details,PaymentTerms terms,address projectTeam)PaymentTerms(uint256 amount,uint256 deadline,bool requiresApproval)TokenPermissions(address token,uint256 amount)VulnerabilityDetails(string bugId,uint8 severity,string description)"</span><span class="p">;</span>
+    
+    <span class="n">PERMIT2</span><span class="p">.</span><span class="n">permitWitnessTransferFrom</span><span class="p">(</span>
+        <span class="n">permit</span><span class="p">,</span>
+        <span class="n">transferDetails</span><span class="p">,</span>
+        <span class="n">projectTeam</span><span class="p">,</span>
+        <span class="n">witnessHash</span><span class="p">,</span>
+        <span class="n">witnessTypeString</span><span class="p">,</span>
+        <span class="n">signature</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="dynamic-data-witness-including-custom-instructions">Dynamic Data Witness: Including Custom Instructions</h3>
+
+<p>Sometimes you need to include variable-length data like custom execution instructions:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">BountyWithInstructions</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="n">researcher</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">bugId</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">amount</span><span class="p">;</span>
+    <span class="kt">bytes</span> <span class="n">executionData</span><span class="p">;</span> <span class="c1">// Dynamic bytes for custom logic
+</span>    <span class="kt">uint256</span> <span class="n">deadline</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bytes32</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">BOUNTY_INSTRUCTIONS_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"BountyWithInstructions(address researcher,string bugId,uint256 amount,bytes executionData,uint256 deadline)"</span>
+<span class="p">);</span>
+
+<span class="k">function</span> <span class="n">processBountyWithInstructions</span><span class="p">(</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">PermitTransferFrom</span> <span class="k">calldata</span> <span class="n">permit</span><span class="p">,</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">SignatureTransferDetails</span> <span class="k">calldata</span> <span class="n">transferDetails</span><span class="p">,</span>
+    <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">,</span>
+    <span class="n">BountyWithInstructions</span> <span class="k">calldata</span> <span class="n">bounty</span><span class="p">,</span>
+    <span class="kt">bytes</span> <span class="k">calldata</span> <span class="n">signature</span>
+<span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+    <span class="c1">// Generate witness hash with dynamic bytes
+</span>    <span class="kt">bytes32</span> <span class="n">witnessHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">BOUNTY_INSTRUCTIONS_TYPEHASH</span><span class="p">,</span>
+        <span class="n">bounty</span><span class="p">.</span><span class="n">researcher</span><span class="p">,</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">bounty</span><span class="p">.</span><span class="n">bugId</span><span class="p">)),</span>  <span class="c1">// String: hash first
+</span>        <span class="n">bounty</span><span class="p">.</span><span class="n">amount</span><span class="p">,</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="n">bounty</span><span class="p">.</span><span class="n">executionData</span><span class="p">),</span> <span class="c1">// Bytes: hash first
+</span>        <span class="n">bounty</span><span class="p">.</span><span class="n">deadline</span>
+    <span class="p">));</span>
+    
+    <span class="kt">string</span> <span class="k">memory</span> <span class="n">witnessTypeString</span> <span class="o">=</span> 
+        <span class="s">"BountyWithInstructions witness)BountyWithInstructions(address researcher,string bugId,uint256 amount,bytes executionData,uint256 deadline)TokenPermissions(address token,uint256 amount)"</span><span class="p">;</span>
+    
+    <span class="n">PERMIT2</span><span class="p">.</span><span class="n">permitWitnessTransferFrom</span><span class="p">(</span>
+        <span class="n">permit</span><span class="p">,</span>
+        <span class="n">transferDetails</span><span class="p">,</span>
+        <span class="n">projectTeam</span><span class="p">,</span>
+        <span class="n">witnessHash</span><span class="p">,</span>
+        <span class="n">witnessTypeString</span><span class="p">,</span>
+        <span class="n">signature</span>
+    <span class="p">);</span>
+    
+    <span class="c1">// Execute custom logic based on executionData
+</span>    <span class="k">if</span> <span class="p">(</span><span class="n">bounty</span><span class="p">.</span><span class="n">executionData</span><span class="p">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">(</span><span class="kt">bool</span> <span class="n">success</span><span class="p">,)</span> <span class="o">=</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">).</span><span class="nb">call</span><span class="p">(</span><span class="n">bounty</span><span class="p">.</span><span class="n">executionData</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="s">"Execution failed"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="array-witness-batch-vulnerability-processing">Array Witness: Batch Vulnerability Processing</h3>
+
+<p>The most complex witness scenario involves arrays of structs, enabling batch processing:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">VulnerabilityPayout</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="n">bugId</span><span class="p">;</span>
+    <span class="kt">uint8</span> <span class="n">severity</span><span class="p">;</span>
+    <span class="kt">address</span> <span class="n">researcher</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">amount</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">BatchVulnerabilityReport</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">;</span>
+    <span class="n">VulnerabilityPayout</span><span class="p">[]</span> <span class="n">vulnerabilities</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">totalAmount</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">deadline</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bytes32</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">VULNERABILITY_PAYOUT_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"VulnerabilityPayout(string bugId,uint8 severity,address researcher,uint256 amount)"</span>
+<span class="p">);</span>
+
+<span class="kt">bytes32</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">BATCH_VULNERABILITY_TYPEHASH</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span>
+    <span class="s">"BatchVulnerabilityReport(address projectTeam,VulnerabilityPayout[] vulnerabilities,uint256 totalAmount,uint256 deadline)TokenPermissions(address token,uint256 amount)VulnerabilityPayout(string bugId,uint8 severity,address researcher,uint256 amount)"</span>
+<span class="p">);</span>
+
+<span class="k">function</span> <span class="n">processBatchVulnerabilities</span><span class="p">(</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">PermitBatchTransferFrom</span> <span class="k">calldata</span> <span class="n">permit</span><span class="p">,</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">SignatureTransferDetails</span><span class="p">[]</span> <span class="k">calldata</span> <span class="n">transferDetails</span><span class="p">,</span>
+    <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">,</span>
+    <span class="n">BatchVulnerabilityReport</span> <span class="k">calldata</span> <span class="n">batchReport</span><span class="p">,</span>
+    <span class="kt">bytes</span> <span class="k">calldata</span> <span class="n">signature</span>
+<span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">batchReport</span><span class="p">.</span><span class="n">vulnerabilities</span><span class="p">.</span><span class="n">length</span> <span class="o">==</span> <span class="n">transferDetails</span><span class="p">.</span><span class="n">length</span><span class="p">,</span> <span class="s">"Length mismatch"</span><span class="p">);</span>
+    
+    <span class="c1">// Hash the array of vulnerabilities
+</span>    <span class="kt">bytes32</span> <span class="n">vulnerabilitiesHash</span> <span class="o">=</span> <span class="n">_hashVulnerabilityArray</span><span class="p">(</span><span class="n">batchReport</span><span class="p">.</span><span class="n">vulnerabilities</span><span class="p">);</span>
+    
+    <span class="c1">// Hash the main batch struct
+</span>    <span class="kt">bytes32</span> <span class="n">witnessHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">BATCH_VULNERABILITY_TYPEHASH</span><span class="p">,</span>
+        <span class="n">batchReport</span><span class="p">.</span><span class="n">projectTeam</span><span class="p">,</span>
+        <span class="n">vulnerabilitiesHash</span><span class="p">,</span> <span class="c1">// Use array hash
+</span>        <span class="n">batchReport</span><span class="p">.</span><span class="n">totalAmount</span><span class="p">,</span>
+        <span class="n">batchReport</span><span class="p">.</span><span class="n">deadline</span>
+    <span class="p">));</span>
+    
+    <span class="kt">string</span> <span class="k">memory</span> <span class="n">witnessTypeString</span> <span class="o">=</span> 
+        <span class="s">"BatchVulnerabilityReport witness)BatchVulnerabilityReport(address projectTeam,VulnerabilityPayout[] vulnerabilities,uint256 totalAmount,uint256 deadline)TokenPermissions(address token,uint256 amount)VulnerabilityPayout(string bugId,uint8 severity,address researcher,uint256 amount)"</span><span class="p">;</span>
+    
+    <span class="n">PERMIT2</span><span class="p">.</span><span class="n">permitWitnessTransferFrom</span><span class="p">(</span>
+        <span class="n">permit</span><span class="p">,</span>
+        <span class="n">transferDetails</span><span class="p">,</span>
+        <span class="n">projectTeam</span><span class="p">,</span>
+        <span class="n">witnessHash</span><span class="p">,</span>
+        <span class="n">witnessTypeString</span><span class="p">,</span>
+        <span class="n">signature</span>
+    <span class="p">);</span>
+    
+    <span class="c1">// Process each vulnerability
+</span>    <span class="k">for</span> <span class="p">(</span><span class="kt">uint256</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">batchReport</span><span class="p">.</span><span class="n">vulnerabilities</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">processedVulnerabilities</span><span class="p">[</span><span class="n">batchReport</span><span class="p">.</span><span class="n">vulnerabilities</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">bugId</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">_hashVulnerabilityArray</span><span class="p">(</span><span class="n">VulnerabilityPayout</span><span class="p">[]</span> <span class="k">memory</span> <span class="n">vulnerabilities</span><span class="p">)</span> 
+    <span class="k">internal</span> 
+    <span class="k">pure</span> 
+    <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes32</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">vulnerabilities</span><span class="p">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">""</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kt">bytes</span> <span class="k">memory</span> <span class="n">encodedVulnerabilities</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">uint256</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">vulnerabilities</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">bytes32</span> <span class="n">vulnHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+            <span class="n">VULNERABILITY_PAYOUT_TYPEHASH</span><span class="p">,</span>
+            <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">vulnerabilities</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">bugId</span><span class="p">)),</span>  <span class="c1">// String: hash first
+</span>            <span class="n">vulnerabilities</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">severity</span><span class="p">,</span>
+            <span class="n">vulnerabilities</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">researcher</span><span class="p">,</span>
+            <span class="n">vulnerabilities</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">amount</span>
+        <span class="p">));</span>
+        
+        <span class="n">encodedVulnerabilities</span> <span class="o">=</span> <span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="n">encodedVulnerabilities</span><span class="p">,</span> <span class="n">vulnHash</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">encodedVulnerabilities</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="complete-signature-generation-for-witnesses">Complete Signature Generation for Witnesses</h3>
+
+<p>Generating witness signatures requires careful attention to the EIP-712 structure:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">generateVulnerabilityWitnessSignature</span><span class="p">(</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">PermitTransferFrom</span> <span class="k">memory</span> <span class="n">permit</span><span class="p">,</span>
+    <span class="n">VulnerabilityReport</span> <span class="k">memory</span> <span class="n">vulnerability</span><span class="p">,</span>
+    <span class="kt">address</span> <span class="n">spender</span><span class="p">,</span>
+    <span class="kt">uint256</span> <span class="n">privateKey</span>
+<span class="p">)</span> <span class="k">internal</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bytes</span> <span class="k">memory</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 1. Hash the witness data
+</span>    <span class="kt">bytes32</span> <span class="n">witnessHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">VULNERABILITY_TYPEHASH</span><span class="p">,</span>
+        <span class="n">vulnerability</span><span class="p">.</span><span class="n">researcher</span><span class="p">,</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">vulnerability</span><span class="p">.</span><span class="n">bugId</span><span class="p">)),</span>
+        <span class="n">vulnerability</span><span class="p">.</span><span class="n">severity</span><span class="p">,</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">vulnerability</span><span class="p">.</span><span class="n">description</span><span class="p">)),</span>
+        <span class="n">vulnerability</span><span class="p">.</span><span class="n">bountyAmount</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// 2. Create witness type string
+</span>    <span class="kt">string</span> <span class="k">memory</span> <span class="n">witnessTypeString</span> <span class="o">=</span> 
+        <span class="s">"VulnerabilityReport witness)VulnerabilityReport(address researcher,string bugId,uint8 severity,string description,uint256 bountyAmount)TokenPermissions(address token,uint256 amount)"</span><span class="p">;</span>
+    
+    <span class="c1">// 3. Generate permit witness type hash
+</span>    <span class="kt">bytes32</span> <span class="n">permitWitnessTypehash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span>
+        <span class="s">"PermitWitnessTransferFrom(TokenPermissions permitted,address spender,uint256 nonce,uint256 deadline,"</span><span class="p">,</span>
+        <span class="n">witnessTypeString</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// 4. Hash TokenPermissions
+</span>    <span class="kt">bytes32</span> <span class="n">tokenPermissionsHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="s">"TokenPermissions(address token,uint256 amount)"</span><span class="p">),</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">permitted</span><span class="p">.</span><span class="n">token</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">permitted</span><span class="p">.</span><span class="n">amount</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// 5. Create final struct hash
+</span>    <span class="kt">bytes32</span> <span class="n">structHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">permitWitnessTypehash</span><span class="p">,</span>
+        <span class="n">tokenPermissionsHash</span><span class="p">,</span>
+        <span class="n">spender</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">nonce</span><span class="p">,</span>
+        <span class="n">permit</span><span class="p">.</span><span class="n">deadline</span><span class="p">,</span>
+        <span class="n">witnessHash</span>  <span class="c1">// Witness hash is included here
+</span>    <span class="p">));</span>
+    
+    <span class="c1">// 6. Create EIP-712 hash
+</span>    <span class="kt">bytes32</span> <span class="n">hash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span>
+        <span class="s">"</span><span class="se">\x19\x01</span><span class="s">"</span><span class="p">,</span>
+        <span class="n">PERMIT2</span><span class="p">.</span><span class="n">DOMAIN_SEPARATOR</span><span class="p">(),</span>
+        <span class="n">structHash</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// 7. Sign
+</span>    <span class="p">(</span><span class="kt">uint8</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bytes32</span> <span class="n">r</span><span class="p">,</span> <span class="kt">bytes32</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="n">vm</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="n">privateKey</span><span class="p">,</span> <span class="n">hash</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="witness-vs-non-witness-when-to-use-each">Witness vs Non-Witness: When to Use Each</h3>
+
+<p><strong>Use Standard Transfers when:</strong></p>
+<ul>
+  <li>Simple token movements without additional context</li>
+  <li>Gas efficiency is paramount</li>
+  <li>No custom validation logic needed</li>
+</ul>
+
+<p><strong>Use Witness Transfers when:</strong></p>
+<ul>
+  <li>Need to verify additional data alongside token transfers</li>
+  <li>Want to bind transfers to specific contract logic</li>
+  <li>Require immutable audit trails</li>
+  <li>Implementing complex multi-step workflows</li>
+</ul>
+
+<h3 id="security-considerations-for-witness-transfers">Security Considerations for Witness Transfers</h3>
+
+<ol>
+  <li>
+<strong>Type String Validation</strong>: Always validate witness type strings match your structs exactly</li>
+  <li>
+<strong>Data Integrity</strong>: Ensure witness data corresponds to actual transfer parameters</li>
+  <li>
+<strong>Replay Protection</strong>: Witness hashes don’t provide additional replay protection beyond nonces (EIP-712 protection still applies)</li>
+  <li>
+<strong>Gas Costs</strong>: Complex witness data increases signature verification costs</li>
+</ol>
+
+<h3 id="advanced-patterns-conditional-logic">Advanced Patterns: Conditional Logic</h3>
+
+<p>Witness transfers can enable sophisticated conditional logic:</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">ConditionalBounty</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="n">researcher</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">bugId</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">baseAmount</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">bonusAmount</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">criticalSeverity</span><span class="p">;</span>
+    <span class="kt">uint256</span> <span class="n">deadline</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">processConditionalBounty</span><span class="p">(</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">PermitTransferFrom</span> <span class="k">calldata</span> <span class="n">permit</span><span class="p">,</span>
+    <span class="n">ISignatureTransfer</span><span class="p">.</span><span class="n">SignatureTransferDetails</span> <span class="k">calldata</span> <span class="n">transferDetails</span><span class="p">,</span>
+    <span class="kt">address</span> <span class="n">projectTeam</span><span class="p">,</span>
+    <span class="n">ConditionalBounty</span> <span class="k">calldata</span> <span class="n">bounty</span><span class="p">,</span>
+    <span class="kt">bytes</span> <span class="k">calldata</span> <span class="n">signature</span>
+<span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+    <span class="c1">// Calculate expected amount based on conditions
+</span>    <span class="kt">uint256</span> <span class="n">expectedAmount</span> <span class="o">=</span> <span class="n">bounty</span><span class="p">.</span><span class="n">baseAmount</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">bounty</span><span class="p">.</span><span class="n">criticalSeverity</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">expectedAmount</span> <span class="o">+=</span> <span class="n">bounty</span><span class="p">.</span><span class="n">bonusAmount</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="nb">require</span><span class="p">(</span><span class="n">transferDetails</span><span class="p">.</span><span class="n">requestedAmount</span> <span class="o">==</span> <span class="n">expectedAmount</span><span class="p">,</span> <span class="s">"Incorrect amount"</span><span class="p">);</span>
+    
+    <span class="c1">// Generate witness hash
+</span>    <span class="kt">bytes32</span> <span class="n">witnessHash</span> <span class="o">=</span> <span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">CONDITIONAL_BOUNTY_TYPEHASH</span><span class="p">,</span>
+        <span class="n">bounty</span><span class="p">.</span><span class="n">researcher</span><span class="p">,</span>
+        <span class="nb">keccak256</span><span class="p">(</span><span class="kt">bytes</span><span class="p">(</span><span class="n">bounty</span><span class="p">.</span><span class="n">bugId</span><span class="p">)),</span>
+        <span class="n">bounty</span><span class="p">.</span><span class="n">baseAmount</span><span class="p">,</span>
+        <span class="n">bounty</span><span class="p">.</span><span class="n">bonusAmount</span><span class="p">,</span>
+        <span class="n">bounty</span><span class="p">.</span><span class="n">criticalSeverity</span><span class="p">,</span>
+        <span class="n">bounty</span><span class="p">.</span><span class="n">deadline</span>
+    <span class="p">));</span>
+    
+    <span class="c1">// Process with witness verification
+</span>    <span class="n">PERMIT2</span><span class="p">.</span><span class="n">permitWitnessTransferFrom</span><span class="p">(</span>
+        <span class="n">permit</span><span class="p">,</span>
+        <span class="n">transferDetails</span><span class="p">,</span>
+        <span class="n">projectTeam</span><span class="p">,</span>
+        <span class="n">witnessHash</span><span class="p">,</span>
+        <span class="n">conditionalWitnessTypeString</span><span class="p">,</span>
+        <span class="n">signature</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="best-practices-for-witness-transfers">Best Practices for Witness Transfers</h3>
+
+<ol>
+  <li>
+<strong>Consistent Formatting</strong>: Use constants for type strings to avoid errors</li>
+  <li>
+<strong>Comprehensive Testing</strong>: Test all witness type combinations thoroughly</li>
+  <li>
+<strong>Gas Optimization</strong>: Pre-compute type hashes where possible</li>
+  <li>
+<strong>Error Handling</strong>: Provide clear error messages for witness validation failures</li>
+  <li>
+<strong>Documentation</strong>: Document witness struct formats for frontend integration</li>
+</ol>
+
+<p>Witness transfers represent the culmination of EIP-712 and permit2’s capabilities, enabling you to build sophisticated, verifiable workflows that combine token movements with rich contract logic. Your bug bounty platform can now ensure that every payment is not just authorized by the right project team, but is also tied to verified vulnerability data, creating an immutable audit trail of security research activities.</p>
+
+<hr>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This guide has taken you through the complete journey of implementing EIP-712 and permit2 systems, from basic structured signatures to sophisticated witness-enabled token transfers. The combination of these technologies provides an incredibly powerful foundation for building next-generation DeFi protocols that are both secure and user-friendly.</p>
+
+<h3 id="what-youve-learned">What You’ve Learned</h3>
+
+<p><strong>Section 1: EIP-712 Mastery</strong></p>
+<ul>
+  <li>How to create human-readable, structured signatures</li>
+  <li>Advanced patterns for nested structs and arrays</li>
+  <li>Type hashing and encoding rules for all data types</li>
+  <li>Common pitfalls and best practices for production implementations</li>
+</ul>
+
+<p><strong>Section 2: Permit2 Foundation</strong></p>
+<ul>
+  <li>Both AllowanceTransfer and SignatureTransfer systems</li>
+  <li>When to use each approach for different use cases</li>
+  <li>Nonce management strategies (ordered vs unordered)</li>
+  <li>Gas optimization techniques and security considerations</li>
+</ul>
+
+<p><strong>Section 3: Witness Transfer Excellence</strong></p>
+<ul>
+  <li>Binding custom logic directly to token transfers</li>
+  <li>Complex data structures with dynamic content</li>
+  <li>Batch processing with arrays of structs</li>
+  <li>Advanced patterns for conditional logic and automation</li>
+</ul>
+
+<h3 id="the-bug-bounty-platform-a-complete-example">The Bug Bounty Platform: A Complete Example</h3>
+
+<p>Throughout this guide, we’ve built a comprehensive bug bounty platform that demonstrates how these technologies work together in practice:</p>
+
+<ul>
+  <li>
+<strong>Project teams</strong> use EIP-712 to authorize structured bounty payments</li>
+  <li>
+<strong>Permit2</strong> provides efficient, secure token permission management</li>
+  <li>
+<strong>Witness transfers</strong> bind payments to verified vulnerability data</li>
+  <li>
+<strong>Complex logic</strong> handles everything from simple payouts to batch processing</li>
+</ul>
+
+<p>This pattern applies to countless other DeFi use cases: AMMs with slippage protection, lending protocols with collateral verification, DAO governance with proposal binding, and much more.</p>
+
+<h3 id="key-architectural-decisions">Key Architectural Decisions</h3>
+
+<p>When implementing these systems in production, remember the critical decision points:</p>
+
+<p><strong>For EIP-712:</strong></p>
+<ul>
+  <li>Static vs dynamic types affect gas costs and complexity</li>
+  <li>Nested structs provide structure but increase verification costs</li>
+  <li>Arrays enable powerful batch operations but require careful gas management</li>
+</ul>
+
+<p><strong>For Permit2:</strong></p>
+<ul>
+  <li>AllowanceTransfer for ongoing relationships and recurring transactions</li>
+  <li>SignatureTransfer for one-time operations and maximum security</li>
+  <li>Witness transfers when you need to verify additional data</li>
+</ul>
+
+<p><strong>For Security:</strong></p>
+<ul>
+  <li>Always validate amounts, deadlines, and nonces</li>
+  <li>Implement signature-based emergency functions for compromised accounts that can be submitted on the user’s behalf</li>
+  <li>Use consistent type strings to avoid verification errors</li>
+</ul>
+
+<h3 id="getting-started">Getting Started</h3>
+
+<p>Ready to implement these patterns in your own protocol? Here’s your action plan:</p>
+
+<ol>
+  <li>
+<strong>Start Simple</strong>: Begin with basic EIP-712 structs for your core data types</li>
+  <li>
+<strong>Add Permit2</strong>: Integrate SignatureTransfer for one-time operations first</li>
+  <li>
+<strong>Implement Witnesses</strong>: Add witness transfers when you need custom logic</li>
+  <li>
+<strong>Scale Up</strong>: Use AllowanceTransfer if required and/or batch operations for efficiency</li>
+  <li>
+<strong>Test Everything</strong>: Comprehensive testing is crucial for signature-based systems</li>
+</ol>
+
+<h3 id="resources-for-continued-learning">Resources for Continued Learning</h3>
+
+<ul>
+  <li>
+<strong>Official Specifications</strong>: <a href="https://eips.ethereum.org/EIPS/eip-712" class="web-link">EIP-712</a> and <a href="https://docs.uniswap.org/contracts/permit2/overview" class="web-link">Permit2 Documentation</a>
+</li>
+  <li>
+<strong>Development and Testing Framework</strong>: <a href="https://book.getfoundry.sh/" class="web-link">Foundry</a> for comprehensive smart contract development and testing</li>
+</ul>
+
+<h3 id="final-thoughts">Final Thoughts</h3>
+
+<p>The future of DeFi lies in protocols that respect user agency while providing powerful functionality. EIP-712 and permit2 give users clear visibility into what they’re signing while enabling developers to build sophisticated, efficient systems.</p>
+
+<p>By mastering these technologies, you’re not just learning current best practices, you’re preparing for the next generation of DeFi where structured signatures and context-aware permissions become the standard. The patterns and principles you’ve learned here will serve you well as the ecosystem continues to evolve toward greater security, usability, and sophistication.</p>
+
+<p>Welcome to the new era of structured, secure, and user-friendly DeFi. Now go build something amazing.</p>
+
+
+        </div>
+        </div>
+        <hr>
+
+  
+
+</article>  
+<div class="prev-next">
+    
+<a class="prev" href="/articles/table-test"> << Table test</a>
+
+
+</div>
+
+</main>
+<div class="license">
+    <div>
+    <a class="internal-link" href="https://viralpubliclicense.org">
+      VIRAL PUBLIC LICENSE<br>
+      Copyleft (ɔ) All Rights Reversed</a>
+    </div>
+  <br>
+  <br>
+  <subfooter>
+    <a href="#"><strong>↑ Return ↑</strong></a>
+  </subfooter>
+</div>
+</div>
+
+
+</div>
+    
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+  
+</script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add('.post-content h2, h3, h4, h5, h6');</script>
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$', '$'] ],
+      displayMath: [ ['$$', '$$']],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    messageStyle: "none",
+    "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+  });
+  </script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  
+
+  <script type="text/javascript">
+    //hack: remove <p> tags from images in tables 
+       document.querySelectorAll("td").forEach(t => {
+    if (t.textContent.endsWith("</p>")) {
+      // t.textContent = t.textContent.substring(0, t.textContent.length-3)
+      
+      // note to self: make this work by setting text color to td background color
+      // if textContent begins with / ends with escaped p element 
+
+    }
+  })
+  </script>
+
+
+  </body>
+</html>

@@ -1,3 +1,12 @@
+---
+layout: article
+category: article
+subtitle:
+topic: Solidity
+date: 2025-05-26
+tags: solidity, eip, eip-712, permit2, evm
+---
+
 # EIP-712 and Permit2: A Developer's Guide
 
 **Author:** Zodomo | [X](https://x.com/0xZodomo) | [Warpcast](https://farcaster.xyz/zodomo) | [GitHub](https://github.com/zodomo/) | [Blog](https://exocore.milady.zip)
@@ -16,82 +25,81 @@ Other resources are available elsewhere to showcase how to produce these signatu
 
 ## Table of Contents
 
-1. [Understanding EIP-712: Making Signatures Human-Readable](#understanding-eip-712-making-signatures-human-readable)
-   - [The Problem: Users Signing Blind](#the-problem-users-signing-blind)
-   - [EIP-712: The Solution](#eip-712-the-solution)
-   - [How EIP-712 Works Under the Hood](#how-eip-712-works-under-the-hood)
-     - [1. Domain Separator: Your App's Unique Fingerprint](#1-domain-separator-your-apps-unique-fingerprint)
-     - [2. Type Hash: The Structure Definition](#2-type-hash-the-structure-definition)
-     - [3. Struct Hash: Encoding Your Actual Data](#3-struct-hash-encoding-your-actual-data)
-     - [Putting It All Together](#putting-it-all-together)
-   - [Verifying EIP-712 Signatures in Your Contract](#verifying-eip-712-signatures-in-your-contract)
-   - [Advanced EIP-712: Nested Structs](#advanced-eip-712-nested-structs)
-   - [Advanced EIP-712: Array Types](#advanced-eip-712-array-types)
-     - [Basic Array Types](#basic-array-types)
-     - [Arrays of Structs: The Complex Case](#arrays-of-structs-the-complex-case)
-     - [The Array Hashing Algorithm](#the-array-hashing-algorithm)
-     - [Empty Arrays and Edge Cases](#empty-arrays-and-edge-cases)
-     - [Practical Example: Multi-Vulnerability Payout Authorization](#practical-example-multi-vulnerability-payout-authorization)
-     - [Critical Rules for Array Hashing](#critical-rules-for-array-hashing)
-     - [Array Type String Construction](#array-type-string-construction)
-     - [Common Array Pitfalls](#common-array-pitfalls)
-   - [Common Pitfalls and Best Practices](#common-pitfalls-and-best-practices)
-
-2. [Permit2: The Ultimate Token Permission System](#permit2-the-ultimate-token-permission-system)
-   - [The Traditional Approval Problem](#the-traditional-approval-problem)
-   - [What is Permit2?](#what-is-permit2)
-   - [Permit2's Dual Architecture](#permit2s-dual-architecture)
-     - [System Comparison at a Glance](#system-comparison-at-a-glance)
-   - [AllowanceTransfer: Enhanced Traditional Approvals](#allowancetransfer-enhanced-traditional-approvals)
-     - [Core Data Structures](#core-data-structures)
-     - [How AllowanceTransfer Works](#how-allowancetransfer-works)
-     - [AllowanceTransfer EIP-712 Implementation](#allowancetransfer-eip-712-implementation)
-     - [Using AllowanceTransfer in Your Bug Bounty Contract](#using-allowancetransfer-in-your-bug-bounty-contract)
-     - [Ordered Nonce Management in AllowanceTransfer](#ordered-nonce-management-in-allowancetransfer)
-   - [SignatureTransfer: Direct One-Time Transfers](#signaturetransfer-direct-one-time-transfers)
-     - [Core Data Structures](#core-data-structures-1)
-     - [How SignatureTransfer Works](#how-signaturetransfer-works)
-     - [SignatureTransfer EIP-712 Implementation](#signaturetransfer-eip-712-implementation)
-     - [Unordered Nonce Management in SignatureTransfer](#unordered-nonce-management-in-signaturetransfer)
-   - [Batch Operations: Maximum Efficiency](#batch-operations-maximum-efficiency)
-     - [AllowanceTransfer Batch](#allowancetransfer-batch)
-     - [SignatureTransfer Batch](#signaturetransfer-batch)
-   - [Permit2's EIP-712 Domain Setup](#permit2s-eip-712-domain-setup)
-   - [Security Considerations and Error Handling](#security-considerations-and-error-handling)
-     - [Time-based Protections](#time-based-protections)
-     - [Amount Validations](#amount-validations)
-     - [Nonce-based Replay Protection](#nonce-based-replay-protection)
-   - [Emergency Features](#emergency-features)
-   - [Gas Efficiency Benefits](#gas-efficiency-benefits)
-     - [Traditional Approach vs Permit2](#traditional-approach-vs-permit2)
-     - [Permit2 Approach](#permit2-approach)
-     - [Batch Operations Provide Maximum Efficiency](#batch-operations-provide-maximum-efficiency)
-   - [Integration Example: Complete Bug Bounty Flow](#integration-example-complete-bug-bounty-flow)
-   - [Choosing Between AllowanceTransfer and SignatureTransfer](#choosing-between-allowancetransfer-and-signaturetransfer)
-   - [Best Practices for Bug Bounty Platforms](#best-practices-for-bug-bounty-platforms)
-
-3. [Permit2 Witness Transfers: Adding Custom Logic](#permit2-witness-transfers-adding-custom-logic)
-   - [What are Witness Transfers?](#what-are-witness-transfers)
-   - [The Problem Witness Transfers Solve](#the-problem-witness-transfers-solve)
-   - [Witness Transfer Fundamentals](#witness-transfer-fundamentals)
-   - [Basic Witness Implementation: Vulnerability Verification](#basic-witness-implementation-vulnerability-verification)
-   - [Witness Type String: The Critical Component](#witness-type-string-the-critical-component)
-   - [Advanced Witness: Nested Structs](#advanced-witness-nested-structs)
-   - [Dynamic Data Witness: Including Custom Instructions](#dynamic-data-witness-including-custom-instructions)
-   - [Array Witness: Batch Vulnerability Processing](#array-witness-batch-vulnerability-processing)
-   - [Complete Signature Generation for Witnesses](#complete-signature-generation-for-witnesses)
-   - [Witness vs Non-Witness: When to Use Each](#witness-vs-non-witness-when-to-use-each)
-   - [Security Considerations for Witness Transfers](#security-considerations-for-witness-transfers)
-   - [Advanced Patterns: Conditional Logic](#advanced-patterns-conditional-logic)
-   - [Best Practices for Witness Transfers](#best-practices-for-witness-transfers)
-
-4. [Conclusion](#conclusion)
-   - [What You've Learned](#what-youve-learned)
-   - [The Bug Bounty Platform: A Complete Example](#the-bug-bounty-platform-a-complete-example)
-   - [Key Architectural Decisions](#key-architectural-decisions)
-   - [Getting Started](#getting-started)
-   - [Resources for Continued Learning](#resources-for-continued-learning)
-   - [Final Thoughts](#final-thoughts)
+- [EIP-712 and Permit2: A Developer's Guide](#eip-712-and-permit2-a-developers-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Understanding EIP-712: Making Signatures Human-Readable](#understanding-eip-712-making-signatures-human-readable)
+    - [The Problem: Users Signing Blind](#the-problem-users-signing-blind)
+    - [EIP-712: The Solution](#eip-712-the-solution)
+    - [How EIP-712 Works Under the Hood](#how-eip-712-works-under-the-hood)
+      - [1. Domain Separator: Your App's Unique Fingerprint](#1-domain-separator-your-apps-unique-fingerprint)
+      - [2. Type Hash: The Structure Definition](#2-type-hash-the-structure-definition)
+      - [3. Struct Hash: Encoding Your Actual Data](#3-struct-hash-encoding-your-actual-data)
+      - [Putting It All Together](#putting-it-all-together)
+    - [Verifying EIP-712 Signatures in Your Contract](#verifying-eip-712-signatures-in-your-contract)
+    - [Advanced EIP-712: Nested Structs](#advanced-eip-712-nested-structs)
+    - [Advanced EIP-712: Array Types](#advanced-eip-712-array-types)
+      - [Basic Array Types](#basic-array-types)
+      - [Arrays of Structs: The Complex Case](#arrays-of-structs-the-complex-case)
+      - [The Array Hashing Algorithm](#the-array-hashing-algorithm)
+      - [Empty Arrays and Edge Cases](#empty-arrays-and-edge-cases)
+      - [Practical Example: Multi-Vulnerability Payout Authorization](#practical-example-multi-vulnerability-payout-authorization)
+      - [Critical Rules for Array Hashing](#critical-rules-for-array-hashing)
+      - [Array Type String Construction](#array-type-string-construction)
+      - [Common Array Pitfalls](#common-array-pitfalls)
+    - [General EIP-712 Pitfalls and Best Practices](#general-eip-712-pitfalls-and-best-practices)
+  - [Permit2: The Ultimate Token Permission System](#permit2-the-ultimate-token-permission-system)
+    - [The Traditional Approval Problem](#the-traditional-approval-problem)
+    - [What is Permit2?](#what-is-permit2)
+    - [Permit2's Dual Architecture](#permit2s-dual-architecture)
+      - [System Comparison at a Glance](#system-comparison-at-a-glance)
+    - [AllowanceTransfer: Enhanced Traditional Approvals](#allowancetransfer-enhanced-traditional-approvals)
+      - [Core Data Structures](#core-data-structures)
+      - [How AllowanceTransfer Works](#how-allowancetransfer-works)
+      - [AllowanceTransfer EIP-712 Implementation](#allowancetransfer-eip-712-implementation)
+      - [Using AllowanceTransfer in Your Bug Bounty Contract](#using-allowancetransfer-in-your-bug-bounty-contract)
+      - [Ordered Nonce Management in AllowanceTransfer](#ordered-nonce-management-in-allowancetransfer)
+    - [SignatureTransfer: Direct One-Time Transfers](#signaturetransfer-direct-one-time-transfers)
+      - [Core Data Structures](#core-data-structures-1)
+      - [How SignatureTransfer Works](#how-signaturetransfer-works)
+      - [SignatureTransfer EIP-712 Implementation](#signaturetransfer-eip-712-implementation)
+      - [Unordered Nonce Management in SignatureTransfer](#unordered-nonce-management-in-signaturetransfer)
+    - [Batch Operations: Maximum Efficiency](#batch-operations-maximum-efficiency)
+      - [AllowanceTransfer Batch](#allowancetransfer-batch)
+      - [SignatureTransfer Batch](#signaturetransfer-batch)
+    - [Permit2's EIP-712 Domain Setup](#permit2s-eip-712-domain-setup)
+    - [Security Considerations and Error Handling](#security-considerations-and-error-handling)
+      - [Time-based Protections](#time-based-protections)
+      - [Amount Validations](#amount-validations)
+      - [Nonce-based Replay Protection](#nonce-based-replay-protection)
+    - [Emergency Features](#emergency-features)
+    - [Gas Efficiency Benefits](#gas-efficiency-benefits)
+      - [Traditional Approach vs Permit2](#traditional-approach-vs-permit2)
+      - [Permit2 Approach](#permit2-approach)
+      - [Batch Operations Provide Maximum Efficiency](#batch-operations-provide-maximum-efficiency)
+    - [Integration Example: Complete Bug Bounty Flow](#integration-example-complete-bug-bounty-flow)
+    - [Choosing Between AllowanceTransfer and SignatureTransfer](#choosing-between-allowancetransfer-and-signaturetransfer)
+    - [Best Practices for Bug Bounty Platforms](#best-practices-for-bug-bounty-platforms)
+  - [Permit2 Witness Transfers: Adding Custom Logic](#permit2-witness-transfers-adding-custom-logic)
+    - [What are Witness Transfers?](#what-are-witness-transfers)
+    - [The Problem Witness Transfers Solve](#the-problem-witness-transfers-solve)
+    - [Witness Transfer Fundamentals](#witness-transfer-fundamentals)
+    - [Basic Witness Implementation: Vulnerability Verification](#basic-witness-implementation-vulnerability-verification)
+    - [Witness Type String: The Critical Component](#witness-type-string-the-critical-component)
+    - [Advanced Witness: Nested Structs](#advanced-witness-nested-structs)
+    - [Dynamic Data Witness: Including Custom Instructions](#dynamic-data-witness-including-custom-instructions)
+    - [Array Witness: Batch Vulnerability Processing](#array-witness-batch-vulnerability-processing)
+    - [Complete Signature Generation for Witnesses](#complete-signature-generation-for-witnesses)
+    - [Witness vs Non-Witness: When to Use Each](#witness-vs-non-witness-when-to-use-each)
+    - [Security Considerations for Witness Transfers](#security-considerations-for-witness-transfers)
+    - [Advanced Patterns: Conditional Logic](#advanced-patterns-conditional-logic)
+    - [Best Practices for Witness Transfers](#best-practices-for-witness-transfers)
+  - [Conclusion](#conclusion)
+    - [What You've Learned](#what-youve-learned)
+    - [The Bug Bounty Platform: A Complete Example](#the-bug-bounty-platform-a-complete-example)
+    - [Key Architectural Decisions](#key-architectural-decisions)
+    - [Getting Started](#getting-started)
+    - [Resources for Continued Learning](#resources-for-continued-learning)
+    - [Final Thoughts](#final-thoughts)
 
 ---
 
@@ -606,13 +614,13 @@ interface IPermit2 is ISignatureTransfer, IAllowanceTransfer {
 
 #### System Comparison at a Glance
 
-| Feature | AllowanceTransfer | SignatureTransfer |
-|---------|-------------------|-------------------|
-| **Use Case** | Traditional approvals with signatures | One-time direct transfers |
-| **Setup** | Sign once, transfer many times | Sign per transfer |
-| **Nonce Management** | Ordered (sequential) | Unordered (bitmap-based) |
-| **Best For** | Recurring payments, subscriptions | Order fulfillment, atomic swaps |
-| **Gas Efficiency** | Optimal for multiple transfers | Optimal for single transfers |
+| Feature              | AllowanceTransfer                     | SignatureTransfer               |
+| -------------------- | ------------------------------------- | ------------------------------- |
+| **Use Case**         | Traditional approvals with signatures | One-time direct transfers       |
+| **Setup**            | Sign once, transfer many times        | Sign per transfer               |
+| **Nonce Management** | Ordered (sequential)                  | Unordered (bitmap-based)        |
+| **Best For**         | Recurring payments, subscriptions     | Order fulfillment, atomic swaps |
+| **Gas Efficiency**   | Optimal for multiple transfers        | Optimal for single transfers    |
 
 ### AllowanceTransfer: Enhanced Traditional Approvals
 

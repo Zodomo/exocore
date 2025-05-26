@@ -19,22 +19,22 @@
  <script src="/assets/js/sidenotes.js"></script>
  <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Writing with Exocore Syntax | Exocore</title>
-<meta name="generator" content="Jekyll v4.2.1" />
+<meta name="generator" content="Jekyll v4.2.2" />
 <meta property="og:title" content="Writing with Exocore Syntax" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Writing with Exocore Syntax" />
-<meta property="og:description" content="Writing with Exocore Syntax" />
-<link rel="canonical" href="http://localhost:4000/articles/writing-with-exocore-syntax" />
-<meta property="og:url" content="http://localhost:4000/articles/writing-with-exocore-syntax" />
+<meta name="description" content="Markdown Basics" />
+<meta property="og:description" content="Markdown Basics" />
+<link rel="canonical" href="https://exocore.netlify.app/articles/writing-with-exocore-syntax" />
+<meta property="og:url" content="https://exocore.netlify.app/articles/writing-with-exocore-syntax" />
 <meta property="og:site_name" content="Exocore" />
-<meta property="og:image" content="http://localhost:4000/assets/imgs/card.png" />
+<meta property="og:image" content="https://exocore.netlify.app/assets/imgs/card.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-02-04T00:00:00+11:00" />
+<meta property="article:published_time" content="2022-02-04T00:00:00-06:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="http://localhost:4000/assets/imgs/card.png" />
+<meta property="twitter:image" content="https://exocore.netlify.app/assets/imgs/card.png" />
 <meta property="twitter:title" content="Writing with Exocore Syntax" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-10-27T11:28:20+11:00","datePublished":"2022-02-04T00:00:00+11:00","description":"Writing with Exocore Syntax","headline":"Writing with Exocore Syntax","image":"http://localhost:4000/assets/imgs/card.png","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/articles/writing-with-exocore-syntax"},"url":"http://localhost:4000/articles/writing-with-exocore-syntax"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-26T04:41:00-05:00","datePublished":"2022-02-04T00:00:00-06:00","description":"Markdown Basics","headline":"Writing with Exocore Syntax","image":"https://exocore.netlify.app/assets/imgs/card.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://exocore.netlify.app/articles/writing-with-exocore-syntax"},"url":"https://exocore.netlify.app/articles/writing-with-exocore-syntax"}</script>
 <!-- End Jekyll SEO tag -->
 
  <script src="//unpkg.com/element-resize-detector/dist/element-resize-detector.min.js"></script><script src="//unpkg.com/force-graph"></script><script src="https://d3js.org/d3.v6.min.js"></script>
@@ -133,6 +133,13 @@
             
             
 		
+	
+    	
+        
+    
+		
+    
+        
 	
     	
         
@@ -284,7 +291,7 @@
 
           
           <div class="post-date"><strong>Created:</strong> Feb 04, 2022</div>
-          <div class="post-date"><strong>Modified:</strong> Oct 27, 2022</div>
+          <div class="post-date"><strong>Modified:</strong> May 26, 2025</div>
         </div>
 
       <div class="title">
@@ -468,22 +475,22 @@
 
 <h2 id="sidenotes-and-footnotes">Sidenotes and Footnotes:</h2>
 
-<p>Footnotes are done with <code class="language-plaintext highlighter-rouge">[^1]</code>, and look like this: <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote web-link" rel="footnote">1</a></sup> Each footnote is an anchor link to the bottom of the page, with a return link attached. Notice the sidenote in the right margin, identical to the footnote.</p>
+<p>Footnotes are done with <code class="language-plaintext highlighter-rouge">[^1]</code>, and look like this: <sup id="fnref:1"><a href="#fn:1" class="footnote web-link" rel="footnote" role="doc-noteref">1</a></sup> Each footnote is an anchor link to the bottom of the page, with a return link attached. Notice the sidenote in the right margin, identical to the footnote.</p>
 
 <p>All footnotes are also rendered as sidenotes. A footnote forms a commentary or citation best kept separate from the main text, and a sidenote is an easy way for a reader to access such commentary without breaking ergonomy by jumping up and down the page.</p>
 
-<p>If you want to add multi-paragraph footnotes, indent your second paragraph, like this (see footnote at bottom).<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote web-link" rel="footnote">2</a></sup></p>
+<p>If you want to add multi-paragraph footnotes, indent your second paragraph, like this (see footnote at bottom).<sup id="fnref:2"><a href="#fn:2" class="footnote web-link" rel="footnote" role="doc-noteref">2</a></sup></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[^2]: For longer footnotes, you may want to use multiple paragraphs.
 
     Indent paragraphs to include them in the footnote.
 </code></pre></div></div>
 
-<p>You can put a footnote’s markdown reference immediately under a paragraph, like this<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote web-link" rel="footnote">3</a></sup>, or clump them at the end. Either way, they will appear at the bottom in your rendered content.</p>
+<p>You can put a footnote’s markdown reference immediately under a paragraph, like this<sup id="fnref:3"><a href="#fn:3" class="footnote web-link" rel="footnote" role="doc-noteref">3</a></sup>, or clump them at the end. Either way, they will appear at the bottom in your rendered content.</p>
 
 <p><code class="language-plaintext highlighter-rouge">[^3]: This footnote appears immediately underneath its referring paragraph in this document's original markdown, but on the rendered website it shows at the bottom. </code></p>
 
-<p>Footnotes automatically form a numbered list, and can also be mapped by name, like this: <code class="language-plaintext highlighter-rouge">[^named-footnote]</code><sup id="fnref:named-footnote" role="doc-noteref"><a href="#fn:named-footnote" class="footnote web-link" rel="footnote">4</a></sup></p>
+<p>Footnotes automatically form a numbered list, and can also be mapped by name, like this: <code class="language-plaintext highlighter-rouge">[^named-footnote]</code><sup id="fnref:named-footnote"><a href="#fn:named-footnote" class="footnote web-link" rel="footnote" role="doc-noteref">4</a></sup></p>
 
 <h2 id="inserting-images">Inserting images</h2>
 
@@ -522,18 +529,18 @@ cd ~/desktop/james-liao &amp;&amp; bundle exec jekyll serve --baseurl ''
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1" role="doc-endnote">
+    <li id="fn:1">
       <p>This is the first footnote. Note the return button: <a href="#fnref:1" class="reversefootnote web-link" role="doc-backlink">↲</a></p>
     </li>
-    <li id="fn:2" role="doc-endnote">
+    <li id="fn:2">
       <p>For longer footnotes, you may want to use multiple paragraphs.</p>
 
       <p>Indent paragraphs to include them in the footnote. <a href="#fnref:2" class="reversefootnote web-link" role="doc-backlink">↲</a></p>
     </li>
-    <li id="fn:3" role="doc-endnote">
+    <li id="fn:3">
       <p>This footnote appears immediately underneath its referring paragraph in this document’s original markdown, but on the rendered website it shows at the bottom. <a href="#fnref:3" class="reversefootnote web-link" role="doc-backlink">↲</a></p>
     </li>
-    <li id="fn:named-footnote" role="doc-endnote">
+    <li id="fn:named-footnote">
       <p>This footnote has the name ‘named-footnote’. it’s still numbered and appears in sequence the same way the others do, but naming it might help you manage a document with many footnotes when dealing with your local markdown. <a href="#fnref:named-footnote" class="reversefootnote web-link" role="doc-backlink">↲</a></p>
     </li>
   </ol>
@@ -560,7 +567,7 @@ cd ~/desktop/james-liao &amp;&amp; bundle exec jekyll serve --baseurl ''
         <div class="backlinks-title">
         <a href="/articles/exocore-executive-summary""><div class="backlink-box"><b>The Exocore Package</b> — Articles  <br>
           <div class ="backlinks-excerpt">
-            The Exocore Package
+            
 
           </div>
         </a>
@@ -577,8 +584,7 @@ cd ~/desktop/james-liao &amp;&amp; bundle exec jekyll serve --baseurl ''
         <div class="backlinks-title">
         <a href="/articles/using-your-exocore""><div class="backlink-box"><b>Using your Exocore</b> — Articles  <br>
           <div class ="backlinks-excerpt">
-            Using your Exocore
-
+            Now that you’ve installed your exocore this guide will walk you through navigating it in practice. Read a more detailed...
           </div>
         </a>
       </div>
@@ -591,8 +597,7 @@ cd ~/desktop/james-liao &amp;&amp; bundle exec jekyll serve --baseurl ''
         <div class="backlinks-title">
         <a href="/articles/exocore-installation-instructions""><div class="backlink-box"><b>Exocore Installation Instructions</b> — Articles  <br>
           <div class ="backlinks-excerpt">
-            Exocore Installation Instructions
-
+            You can set up a personal website as a public exocortex with no code in this 15 minute guide, using...
           </div>
         </a>
       </div>

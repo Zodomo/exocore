@@ -7,9 +7,17 @@ export default class JekyllGraph {
   }
 
   // d3
+
+  // deprecated: 'net_web' -> 'web'
   drawNetWeb () {
+    this.drawWeb(true);
+  }
+
+  drawWeb (legacy = false) {
     let assetsPath = '/assets' !== '' ? '/assets' : '/assets';
-    fetch(`${assetsPath}/graph-net-web.json`).then(res => res.json()).then(data => {
+    // deprecated: 'net-web' -> 'web' in filenames
+    let filename = legacy ? 'graph-net-web.json' : 'graph-web.json';
+    fetch(`${assetsPath}/${filename}`).then(res => res.json()).then(data => {
 
       // neighbors: replace ids with full object
       data.nodes.forEach(node => {
@@ -34,13 +42,20 @@ export default class JekyllGraph {
         this.graph._destructor();
       }
 
+      // deprecated: 'net_web' -> 'web' in configs
+      const charge    = legacy ? '-400'     : '';
+      const xStrength = legacy ? '0.2' : '';
+      const xVal      = legacy ? '0.1'      : '';
+      const yStrength = legacy ? '0.2' : '';
+      const yVal      = legacy ? '0.1'      : '';
+
       const Graph = ForceGraph()(this.graphDiv)
         // container
         .height(this.graphDiv.parentElement.clientHeight)
         .width(this.graphDiv.parentElement.clientWidth)
         // node
-        .nodeCanvasObject((node, ctx) => this.nodePaint(node, ctx, hoverNode, hoverLink, "net-web"))
-        // .nodePointerAreaPaint((node, color, ctx, scale) => nodePaint(node, nodeTypeInNetWeb(node), ctx))
+        .nodeCanvasObject((node, ctx) => this.nodePaint(node, ctx, hoverNode, hoverLink, "web"))
+        // .nodePointerAreaPaint((node, color, ctx, scale) => nodePaint(node, nodeTypeInWeb(node), ctx))
         .nodeId('id')
         .nodeLabel('label')
         .onNodeClick((node, event) => this.goToPage(node, event))
@@ -56,15 +71,15 @@ export default class JekyllGraph {
         //                       .links(data.links))
 
          .d3Force('charge',  d3.forceManyBody()
-                               .strength(Number('-400')))
+                               .strength(Number(charge)))
          // .d3Force('collide', d3.forceCollide())
          // .d3Force('center',  d3.forceCenter())
          .d3Force('forceX',  d3.forceX()
-                               .strength(Number('0.2'))
-                               .x(Number('0.1')))
+                               .strength(Number(xStrength))
+                               .x(Number(xVal)))
          .d3Force('forceY', d3.forceY()
-                              .strength(Number('0.2'))
-                              .y(Number('0.1')))
+                              .strength(Number(yStrength))
+                              .y(Number(yVal)))
 
         // hover
         .autoPauseRedraw(false) // keep redrawing after engine has stopped
@@ -153,7 +168,7 @@ export default class JekyllGraph {
         .width(this.graphDiv.parentElement.clientWidth)
         // node
         .nodeCanvasObject((node, ctx) => this.nodePaint(node, ctx, hoverNode, hoverLink, "tree"))
-        // .nodePointerAreaPaint((node, color, ctx, scale) => nodePaint(node, nodeTypeInNetWeb(node), ctx))
+        // .nodePointerAreaPaint((node, color, ctx, scale) => nodePaint(node, nodeTypeInWeb(node), ctx))
         .nodeId('id')
         .nodeLabel('label')
         // todo-shift: this shiftNodeHeight() always renders, but animatation is choppy
@@ -226,16 +241,16 @@ export default class JekyllGraph {
 
   // draw helpers
 
-  shiftNodeHeight(node) {
-    if (node.namespace !== 'root' && !this.shifted.includes(node)) {
-      const padding = 5;
-      let areSiblingsLeftEven = (this.numSiblingsLeft[node.parent] % 2) === 1;
-      let altrntr = areSiblingsLeftEven ? 1 : -1;
-      node.fy = node.fy + (altrntr * (this.numSiblingsLeft[node.parent] * padding));
-      this.numSiblingsLeft[node.parent] -= 1;
-      this.shifted.push(node);
-    }
-  }
+  // shiftNodeHeight(node) {
+  //   if ((node.namespace !== 'root') && (node.namespace !== 'i.bonsai') && !this.shifted.includes(node)) {
+  //     const padding = 5;
+  //     let areSiblingsLeftEven = (this.numSiblingsLeft[node.parent] % 2) === 1;
+  //     let altrntr = areSiblingsLeftEven ? 1 : -1;
+  //     node.fy = node.fy + (altrntr * (this.numSiblingsLeft[node.parent] * padding));
+  //     this.numSiblingsLeft[node.parent] -= 1;
+  //     this.shifted.push(node);
+  //   }
+  // }
 
   nodePaint(node, ctx, hoverNode, hoverLink, gType) {
     // todo-shift: this shiftNodeHeight() animates more smoothly, but suffers from a race condition
@@ -264,9 +279,9 @@ export default class JekyllGraph {
       // hoverNode
       radius *= 2;
       fillText = false; // node label should be active
-    } else if (hoverNode !== null && gType === "net-web" && hoverNode.neighbors.nodes.includes(node)) {
+    } else if (hoverNode !== null && gType === "web" && hoverNode.neighbors.nodes.includes(node)) {
       // neighbor to hoverNode
-    } else if (hoverNode !== null && gType === "net-web" && !hoverNode.neighbors.nodes.includes(node)) {
+    } else if (hoverNode !== null && gType === "web" && !hoverNode.neighbors.nodes.includes(node)) {
       // non-neighbor to hoverNode
       fillText = false;
     } else if (hoverNode !== null && gType === "tree" && hoverNode.lineage.nodes.includes(node)) {
