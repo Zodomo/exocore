@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <meta name="keyword" content="solidity,, eip,, eip-712,, permit2,, evm, ">
+  <meta name="keyword" content="">
   <meta name="title" content="EIP-712 and Permit2: A Developer’s Guide">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
@@ -22,19 +22,19 @@
 <meta name="generator" content="Jekyll v4.2.2" />
 <meta property="og:title" content="EIP-712 and Permit2: A Developer’s Guide" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Author: Zodomo X Warpcast GitHub Blog" />
-<meta property="og:description" content="Author: Zodomo X Warpcast GitHub Blog" />
+<meta name="description" content="A navigable, organised hypertext personal knowledge base" />
+<meta property="og:description" content="A navigable, organised hypertext personal knowledge base" />
 <link rel="canonical" href="https://exocore.netlify.app/articles/eip-712-and-permit2-a-developer-s-guide" />
 <meta property="og:url" content="https://exocore.netlify.app/articles/eip-712-and-permit2-a-developer-s-guide" />
 <meta property="og:site_name" content="Exocore" />
 <meta property="og:image" content="https://exocore.netlify.app/assets/imgs/card.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-05-26T00:00:00-05:00" />
+<meta property="article:published_time" content="2000-01-01T00:00:00-06:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://exocore.netlify.app/assets/imgs/card.png" />
 <meta property="twitter:title" content="EIP-712 and Permit2: A Developer’s Guide" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-26T04:41:00-05:00","datePublished":"2025-05-26T00:00:00-05:00","description":"Author: Zodomo X Warpcast GitHub Blog","headline":"EIP-712 and Permit2: A Developer’s Guide","image":"https://exocore.netlify.app/assets/imgs/card.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://exocore.netlify.app/articles/eip-712-and-permit2-a-developer-s-guide"},"url":"https://exocore.netlify.app/articles/eip-712-and-permit2-a-developer-s-guide"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-26T04:54:53-05:00","datePublished":"2000-01-01T00:00:00-06:00","description":"A navigable, organised hypertext personal knowledge base","headline":"EIP-712 and Permit2: A Developer’s Guide","image":"https://exocore.netlify.app/assets/imgs/card.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://exocore.netlify.app/articles/eip-712-and-permit2-a-developer-s-guide"},"url":"https://exocore.netlify.app/articles/eip-712-and-permit2-a-developer-s-guide"}</script>
 <!-- End Jekyll SEO tag -->
 
  <script src="//unpkg.com/element-resize-detector/dist/element-resize-detector.min.js"></script><script src="//unpkg.com/force-graph"></script><script src="https://d3js.org/d3.v6.min.js"></script>
@@ -146,8 +146,6 @@
 	
 	
 	
-	<li><a href="/articles/eip-712-and-permit2-a-developer-s-guide">EIP-712 and Permit2: A Developer’s Guide</a></li>
-	
 	<li><a href="/articles/table-test">Table test</a></li>
 	
 	<li><a href="/articles/configure-exocore-for-personal-use">Configure Exocore for Personal Use</a></li>
@@ -155,6 +153,8 @@
 	<li><a href="/articles/exocore-installation-instructions">Exocore Installation Instructions</a></li>
 	
 	<li><a href="/articles/underpinnings-of-the-exocore">Underpinnings of the Exocore</a></li>
+	
+	<li><a href="/articles/set-up-a-custom-domain">Set up a Custom Domain</a></li>
 	
 		
 	</ul>
@@ -265,16 +265,6 @@
         <div class="sidebar-link-box">
           <a href="/pages/tags/"><p><strong>See All Tags</strong></p></a>
         
-        <a href="/pages/tags/#solidity,">Solidity,</a>
-        
-        <a href="/pages/tags/#eip,">Eip,</a>
-        
-        <a href="/pages/tags/#eip-712,">Eip-712,</a>
-        
-        <a href="/pages/tags/#permit2,">Permit2,</a>
-        
-        <a href="/pages/tags/#evm">Evm</a>
-        
       </div>
   
    </div>
@@ -284,8 +274,8 @@
   <main>
     <div class="prev-next">
     
-<a class="prev" href="/articles/table-test"> << Table test</a>
 
+<a class="next" href="/articles/exocore-executive-summary">The Exocore Package >> </a>
 
 </div>
 
@@ -294,7 +284,7 @@
         <div style="padding: 0.5em 0.5em 0em 0.5em">
 
           
-          <div class="post-date"><strong>Created:</strong> May 26, 2025</div>
+          <div class="post-date"><strong>Created:</strong> Jan 01, 2000</div>
           <div class="post-date"><strong>Modified:</strong> May 26, 2025</div>
         </div>
 
@@ -307,7 +297,7 @@
 <div class="content toc-container">
     <h1 class="toc-header">Table of Contents</h1>
 
-<ol class="inline_toc" id="my_toc"><li><a href="#table-of-contents">Table of Contents</a></li><li><a href="#understanding-eip-712-making-signatures-human-readable">Understanding EIP-712: Making Signatures Human-Readable</a><ol><li><a href="#the-problem-users-signing-blind">The Problem: Users Signing Blind</a></li><li><a href="#eip-712-the-solution">EIP-712: The Solution</a></li><li><a href="#how-eip-712-works-under-the-hood">How EIP-712 Works Under the Hood</a><ol><li><a href="#1-domain-separator-your-apps-unique-fingerprint">1. Domain Separator: Your App’s Unique Fingerprint</a></li><li><a href="#2-type-hash-the-structure-definition">2. Type Hash: The Structure Definition</a></li><li><a href="#3-struct-hash-encoding-your-actual-data">3. Struct Hash: Encoding Your Actual Data</a></li><li><a href="#putting-it-all-together">Putting It All Together</a></li></ol></li><li><a href="#verifying-eip-712-signatures-in-your-contract">Verifying EIP-712 Signatures in Your Contract</a></li><li><a href="#advanced-eip-712-nested-structs">Advanced EIP-712: Nested Structs</a></li><li><a href="#advanced-eip-712-array-types">Advanced EIP-712: Array Types</a><ol><li><a href="#basic-array-types">Basic Array Types</a></li><li><a href="#arrays-of-structs-the-complex-case">Arrays of Structs: The Complex Case</a></li><li><a href="#the-array-hashing-algorithm">The Array Hashing Algorithm</a></li><li><a href="#empty-arrays-and-edge-cases">Empty Arrays and Edge Cases</a></li><li><a href="#practical-example-multi-vulnerability-payout-authorization">Practical Example: Multi-Vulnerability Payout Authorization</a></li><li><a href="#critical-rules-for-array-hashing">Critical Rules for Array Hashing</a></li><li><a href="#array-type-string-construction">Array Type String Construction</a></li><li><a href="#common-array-pitfalls">Common Array Pitfalls</a></li></ol></li><li><a href="#general-eip-712-pitfalls-and-best-practices">General EIP-712 Pitfalls and Best Practices</a></li></ol></li><li><a href="#permit2-the-ultimate-token-permission-system">Permit2: The Ultimate Token Permission System</a><ol><li><a href="#the-traditional-approval-problem">The Traditional Approval Problem</a></li><li><a href="#what-is-permit2">What is Permit2?</a></li><li><a href="#permit2s-dual-architecture">Permit2’s Dual Architecture</a><ol><li><a href="#system-comparison-at-a-glance">System Comparison at a Glance</a></li></ol></li><li><a href="#allowancetransfer-enhanced-traditional-approvals">AllowanceTransfer: Enhanced Traditional Approvals</a><ol><li><a href="#core-data-structures">Core Data Structures</a></li><li><a href="#how-allowancetransfer-works">How AllowanceTransfer Works</a></li><li><a href="#allowancetransfer-eip-712-implementation">AllowanceTransfer EIP-712 Implementation</a></li><li><a href="#using-allowancetransfer-in-your-bug-bounty-contract">Using AllowanceTransfer in Your Bug Bounty Contract</a></li><li><a href="#ordered-nonce-management-in-allowancetransfer">Ordered Nonce Management in AllowanceTransfer</a></li></ol></li><li><a href="#signaturetransfer-direct-one-time-transfers">SignatureTransfer: Direct One-Time Transfers</a><ol><li><a href="#core-data-structures-1">Core Data Structures</a></li><li><a href="#how-signaturetransfer-works">How SignatureTransfer Works</a></li><li><a href="#signaturetransfer-eip-712-implementation">SignatureTransfer EIP-712 Implementation</a></li><li><a href="#unordered-nonce-management-in-signaturetransfer">Unordered Nonce Management in SignatureTransfer</a></li></ol></li><li><a href="#batch-operations-maximum-efficiency">Batch Operations: Maximum Efficiency</a><ol><li><a href="#allowancetransfer-batch">AllowanceTransfer Batch</a></li><li><a href="#signaturetransfer-batch">SignatureTransfer Batch</a></li></ol></li><li><a href="#permit2s-eip-712-domain-setup">Permit2’s EIP-712 Domain Setup</a></li><li><a href="#security-considerations-and-error-handling">Security Considerations and Error Handling</a><ol><li><a href="#time-based-protections">Time-based Protections</a></li><li><a href="#amount-validations">Amount Validations</a></li><li><a href="#nonce-based-replay-protection">Nonce-based Replay Protection</a></li></ol></li><li><a href="#emergency-features">Emergency Features</a></li><li><a href="#gas-efficiency-benefits">Gas Efficiency Benefits</a><ol><li><a href="#traditional-approach-vs-permit2">Traditional Approach vs Permit2</a></li><li><a href="#permit2-approach">Permit2 Approach</a></li><li><a href="#batch-operations-provide-maximum-efficiency">Batch Operations Provide Maximum Efficiency</a></li></ol></li><li><a href="#integration-example-complete-bug-bounty-flow">Integration Example: Complete Bug Bounty Flow</a></li><li><a href="#choosing-between-allowancetransfer-and-signaturetransfer">Choosing Between AllowanceTransfer and SignatureTransfer</a></li><li><a href="#best-practices-for-bug-bounty-platforms">Best Practices for Bug Bounty Platforms</a></li></ol></li><li><a href="#permit2-witness-transfers-adding-custom-logic">Permit2 Witness Transfers: Adding Custom Logic</a><ol><li><a href="#what-are-witness-transfers">What are Witness Transfers?</a></li><li><a href="#the-problem-witness-transfers-solve">The Problem Witness Transfers Solve</a></li><li><a href="#witness-transfer-fundamentals">Witness Transfer Fundamentals</a></li><li><a href="#basic-witness-implementation-vulnerability-verification">Basic Witness Implementation: Vulnerability Verification</a></li><li><a href="#witness-type-string-the-critical-component">Witness Type String: The Critical Component</a></li><li><a href="#advanced-witness-nested-structs">Advanced Witness: Nested Structs</a></li><li><a href="#dynamic-data-witness-including-custom-instructions">Dynamic Data Witness: Including Custom Instructions</a></li><li><a href="#array-witness-batch-vulnerability-processing">Array Witness: Batch Vulnerability Processing</a></li><li><a href="#complete-signature-generation-for-witnesses">Complete Signature Generation for Witnesses</a></li><li><a href="#witness-vs-non-witness-when-to-use-each">Witness vs Non-Witness: When to Use Each</a></li><li><a href="#security-considerations-for-witness-transfers">Security Considerations for Witness Transfers</a></li><li><a href="#advanced-patterns-conditional-logic">Advanced Patterns: Conditional Logic</a></li><li><a href="#best-practices-for-witness-transfers">Best Practices for Witness Transfers</a></li></ol></li><li><a href="#conclusion">Conclusion</a><ol><li><a href="#what-youve-learned">What You’ve Learned</a></li><li><a href="#the-bug-bounty-platform-a-complete-example">The Bug Bounty Platform: A Complete Example</a></li><li><a href="#key-architectural-decisions">Key Architectural Decisions</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#resources-for-continued-learning">Resources for Continued Learning</a></li><li><a href="#final-thoughts">Final Thoughts</a></li></ol></li></ol></div>
+<ol class="inline_toc" id="my_toc"><li><a href="#understanding-eip-712-making-signatures-human-readable">Understanding EIP-712: Making Signatures Human-Readable</a><ol><li><a href="#the-problem-users-signing-blind">The Problem: Users Signing Blind</a></li><li><a href="#eip-712-the-solution">EIP-712: The Solution</a></li><li><a href="#how-eip-712-works-under-the-hood">How EIP-712 Works Under the Hood</a><ol><li><a href="#1-domain-separator-your-apps-unique-fingerprint">1. Domain Separator: Your App’s Unique Fingerprint</a></li><li><a href="#2-type-hash-the-structure-definition">2. Type Hash: The Structure Definition</a></li><li><a href="#3-struct-hash-encoding-your-actual-data">3. Struct Hash: Encoding Your Actual Data</a></li><li><a href="#putting-it-all-together">Putting It All Together</a></li></ol></li><li><a href="#verifying-eip-712-signatures-in-your-contract">Verifying EIP-712 Signatures in Your Contract</a></li><li><a href="#advanced-eip-712-nested-structs">Advanced EIP-712: Nested Structs</a></li><li><a href="#advanced-eip-712-array-types">Advanced EIP-712: Array Types</a><ol><li><a href="#basic-array-types">Basic Array Types</a></li><li><a href="#arrays-of-structs-the-complex-case">Arrays of Structs: The Complex Case</a></li><li><a href="#the-array-hashing-algorithm">The Array Hashing Algorithm</a></li><li><a href="#empty-arrays-and-edge-cases">Empty Arrays and Edge Cases</a></li><li><a href="#practical-example-multi-vulnerability-payout-authorization">Practical Example: Multi-Vulnerability Payout Authorization</a></li><li><a href="#critical-rules-for-array-hashing">Critical Rules for Array Hashing</a></li><li><a href="#array-type-string-construction">Array Type String Construction</a></li><li><a href="#common-array-pitfalls">Common Array Pitfalls</a></li></ol></li><li><a href="#general-eip-712-pitfalls-and-best-practices">General EIP-712 Pitfalls and Best Practices</a></li></ol></li><li><a href="#permit2-the-ultimate-token-permission-system">Permit2: The Ultimate Token Permission System</a><ol><li><a href="#the-traditional-approval-problem">The Traditional Approval Problem</a></li><li><a href="#what-is-permit2">What is Permit2?</a></li><li><a href="#permit2s-dual-architecture">Permit2’s Dual Architecture</a><ol><li><a href="#system-comparison-at-a-glance">System Comparison at a Glance</a></li></ol></li><li><a href="#allowancetransfer-enhanced-traditional-approvals">AllowanceTransfer: Enhanced Traditional Approvals</a><ol><li><a href="#core-data-structures">Core Data Structures</a></li><li><a href="#how-allowancetransfer-works">How AllowanceTransfer Works</a></li><li><a href="#allowancetransfer-eip-712-implementation">AllowanceTransfer EIP-712 Implementation</a></li><li><a href="#using-allowancetransfer-in-your-bug-bounty-contract">Using AllowanceTransfer in Your Bug Bounty Contract</a></li><li><a href="#ordered-nonce-management-in-allowancetransfer">Ordered Nonce Management in AllowanceTransfer</a></li></ol></li><li><a href="#signaturetransfer-direct-one-time-transfers">SignatureTransfer: Direct One-Time Transfers</a><ol><li><a href="#core-data-structures-1">Core Data Structures</a></li><li><a href="#how-signaturetransfer-works">How SignatureTransfer Works</a></li><li><a href="#signaturetransfer-eip-712-implementation">SignatureTransfer EIP-712 Implementation</a></li><li><a href="#unordered-nonce-management-in-signaturetransfer">Unordered Nonce Management in SignatureTransfer</a></li></ol></li><li><a href="#batch-operations-maximum-efficiency">Batch Operations: Maximum Efficiency</a><ol><li><a href="#allowancetransfer-batch">AllowanceTransfer Batch</a></li><li><a href="#signaturetransfer-batch">SignatureTransfer Batch</a></li></ol></li><li><a href="#permit2s-eip-712-domain-setup">Permit2’s EIP-712 Domain Setup</a></li><li><a href="#security-considerations-and-error-handling">Security Considerations and Error Handling</a><ol><li><a href="#time-based-protections">Time-based Protections</a></li><li><a href="#amount-validations">Amount Validations</a></li><li><a href="#nonce-based-replay-protection">Nonce-based Replay Protection</a></li></ol></li><li><a href="#emergency-features">Emergency Features</a></li><li><a href="#gas-efficiency-benefits">Gas Efficiency Benefits</a><ol><li><a href="#traditional-approach-vs-permit2">Traditional Approach vs Permit2</a></li><li><a href="#permit2-approach">Permit2 Approach</a></li><li><a href="#batch-operations-provide-maximum-efficiency">Batch Operations Provide Maximum Efficiency</a></li></ol></li><li><a href="#integration-example-complete-bug-bounty-flow">Integration Example: Complete Bug Bounty Flow</a></li><li><a href="#choosing-between-allowancetransfer-and-signaturetransfer">Choosing Between AllowanceTransfer and SignatureTransfer</a></li><li><a href="#best-practices-for-bug-bounty-platforms">Best Practices for Bug Bounty Platforms</a></li></ol></li><li><a href="#permit2-witness-transfers-adding-custom-logic">Permit2 Witness Transfers: Adding Custom Logic</a><ol><li><a href="#what-are-witness-transfers">What are Witness Transfers?</a></li><li><a href="#the-problem-witness-transfers-solve">The Problem Witness Transfers Solve</a></li><li><a href="#witness-transfer-fundamentals">Witness Transfer Fundamentals</a></li><li><a href="#basic-witness-implementation-vulnerability-verification">Basic Witness Implementation: Vulnerability Verification</a></li><li><a href="#witness-type-string-the-critical-component">Witness Type String: The Critical Component</a></li><li><a href="#advanced-witness-nested-structs">Advanced Witness: Nested Structs</a></li><li><a href="#dynamic-data-witness-including-custom-instructions">Dynamic Data Witness: Including Custom Instructions</a></li><li><a href="#array-witness-batch-vulnerability-processing">Array Witness: Batch Vulnerability Processing</a></li><li><a href="#complete-signature-generation-for-witnesses">Complete Signature Generation for Witnesses</a></li><li><a href="#witness-vs-non-witness-when-to-use-each">Witness vs Non-Witness: When to Use Each</a></li><li><a href="#security-considerations-for-witness-transfers">Security Considerations for Witness Transfers</a></li><li><a href="#advanced-patterns-conditional-logic">Advanced Patterns: Conditional Logic</a></li><li><a href="#best-practices-for-witness-transfers">Best Practices for Witness Transfers</a></li></ol></li><li><a href="#conclusion">Conclusion</a><ol><li><a href="#what-youve-learned">What You’ve Learned</a></li><li><a href="#the-bug-bounty-platform-a-complete-example">The Bug Bounty Platform: A Complete Example</a></li><li><a href="#key-architectural-decisions">Key Architectural Decisions</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#resources-for-continued-learning">Resources for Continued Learning</a></li><li><a href="#final-thoughts">Final Thoughts</a></li></ol></li></ol></div>
 
 
         </div>
@@ -329,8 +319,6 @@
   </tbody>
 </table>
 
-<p><em>From zero to hero: Build gasless, secure token transfers with typed signatures</em></p>
-
 <p>I needed to utilize permit2’s witness functionality in Omni SolverNet to add gasless orders. Some of the data structures I had to use were extremely complex. When researching EIP-712 and permit2, I found that documentation for both was rather lacking. EIP-712 is easier to use on flat structs, and many projects use it on such. However, ERC-7683’s ResolvedCrossChainOrder struct (used in SolverNet) is quite complex, has nested struct arrays, and dynamic values such as byte arrays.</p>
 
 <p>I could find no good examples for how to properly build out my typehashes, let alone how to properly sign the orders in Solidity within Foundry tests. However, with the release of Claude 4, I was able to have it comprehensively teach me everything I needed to know about EIP-712 and permit2, especially its witness logic.</p>
@@ -338,142 +326,6 @@
 <p>So, I decided to take what I learned and produce a document to help guide new devs through fully learning how to use these tools, while understanding their importance. As I pretty much solely work in Foundry, I also walk through signing these structs in Solidity, in order to assist with testing such integrations. Throughout this document, I introduce these concepts through the scope of building an onchain bug bounty system.</p>
 
 <p>Other resources are available elsewhere to showcase how to produce these signatures offchain with software such as <a href="https://blog.emn178.cc/en/post/using-ethers-js-to-sign-eip-712-typed-structured-data/" class="web-link">ethers</a>, <a href="https://viem.sh/docs/actions/wallet/signTypedData.html" class="web-link">viem</a>, or <a href="https://wagmi.sh/core/api/actions/signTypedData" class="web-link">wagmi</a>.</p>
-
-<hr>
-
-<h2 id="table-of-contents">Table of Contents</h2>
-
-<ul>
-  <li>
-<a href="#eip-712-and-permit2-a-developers-guide" class="web-link">EIP-712 and Permit2: A Developer’s Guide</a>
-    <ul>
-      <li><a href="#table-of-contents" class="web-link">Table of Contents</a></li>
-      <li>
-<a href="#understanding-eip-712-making-signatures-human-readable" class="web-link">Understanding EIP-712: Making Signatures Human-Readable</a>
-        <ul>
-          <li><a href="#the-problem-users-signing-blind" class="web-link">The Problem: Users Signing Blind</a></li>
-          <li><a href="#eip-712-the-solution" class="web-link">EIP-712: The Solution</a></li>
-          <li>
-<a href="#how-eip-712-works-under-the-hood" class="web-link">How EIP-712 Works Under the Hood</a>
-            <ul>
-              <li><a href="#1-domain-separator-your-apps-unique-fingerprint" class="web-link">1. Domain Separator: Your App’s Unique Fingerprint</a></li>
-              <li><a href="#2-type-hash-the-structure-definition" class="web-link">2. Type Hash: The Structure Definition</a></li>
-              <li><a href="#3-struct-hash-encoding-your-actual-data" class="web-link">3. Struct Hash: Encoding Your Actual Data</a></li>
-              <li><a href="#putting-it-all-together" class="web-link">Putting It All Together</a></li>
-            </ul>
-          </li>
-          <li><a href="#verifying-eip-712-signatures-in-your-contract" class="web-link">Verifying EIP-712 Signatures in Your Contract</a></li>
-          <li><a href="#advanced-eip-712-nested-structs" class="web-link">Advanced EIP-712: Nested Structs</a></li>
-          <li>
-<a href="#advanced-eip-712-array-types" class="web-link">Advanced EIP-712: Array Types</a>
-            <ul>
-              <li><a href="#basic-array-types" class="web-link">Basic Array Types</a></li>
-              <li><a href="#arrays-of-structs-the-complex-case" class="web-link">Arrays of Structs: The Complex Case</a></li>
-              <li><a href="#the-array-hashing-algorithm" class="web-link">The Array Hashing Algorithm</a></li>
-              <li><a href="#empty-arrays-and-edge-cases" class="web-link">Empty Arrays and Edge Cases</a></li>
-              <li><a href="#practical-example-multi-vulnerability-payout-authorization" class="web-link">Practical Example: Multi-Vulnerability Payout Authorization</a></li>
-              <li><a href="#critical-rules-for-array-hashing" class="web-link">Critical Rules for Array Hashing</a></li>
-              <li><a href="#array-type-string-construction" class="web-link">Array Type String Construction</a></li>
-              <li><a href="#common-array-pitfalls" class="web-link">Common Array Pitfalls</a></li>
-            </ul>
-          </li>
-          <li><a href="#general-eip-712-pitfalls-and-best-practices" class="web-link">General EIP-712 Pitfalls and Best Practices</a></li>
-        </ul>
-      </li>
-      <li>
-<a href="#permit2-the-ultimate-token-permission-system" class="web-link">Permit2: The Ultimate Token Permission System</a>
-        <ul>
-          <li><a href="#the-traditional-approval-problem" class="web-link">The Traditional Approval Problem</a></li>
-          <li><a href="#what-is-permit2" class="web-link">What is Permit2?</a></li>
-          <li>
-<a href="#permit2s-dual-architecture" class="web-link">Permit2’s Dual Architecture</a>
-            <ul>
-              <li><a href="#system-comparison-at-a-glance" class="web-link">System Comparison at a Glance</a></li>
-            </ul>
-          </li>
-          <li>
-<a href="#allowancetransfer-enhanced-traditional-approvals" class="web-link">AllowanceTransfer: Enhanced Traditional Approvals</a>
-            <ul>
-              <li><a href="#core-data-structures" class="web-link">Core Data Structures</a></li>
-              <li><a href="#how-allowancetransfer-works" class="web-link">How AllowanceTransfer Works</a></li>
-              <li><a href="#allowancetransfer-eip-712-implementation" class="web-link">AllowanceTransfer EIP-712 Implementation</a></li>
-              <li><a href="#using-allowancetransfer-in-your-bug-bounty-contract" class="web-link">Using AllowanceTransfer in Your Bug Bounty Contract</a></li>
-              <li><a href="#ordered-nonce-management-in-allowancetransfer" class="web-link">Ordered Nonce Management in AllowanceTransfer</a></li>
-            </ul>
-          </li>
-          <li>
-<a href="#signaturetransfer-direct-one-time-transfers" class="web-link">SignatureTransfer: Direct One-Time Transfers</a>
-            <ul>
-              <li><a href="#core-data-structures-1" class="web-link">Core Data Structures</a></li>
-              <li><a href="#how-signaturetransfer-works" class="web-link">How SignatureTransfer Works</a></li>
-              <li><a href="#signaturetransfer-eip-712-implementation" class="web-link">SignatureTransfer EIP-712 Implementation</a></li>
-              <li><a href="#unordered-nonce-management-in-signaturetransfer" class="web-link">Unordered Nonce Management in SignatureTransfer</a></li>
-            </ul>
-          </li>
-          <li>
-<a href="#batch-operations-maximum-efficiency" class="web-link">Batch Operations: Maximum Efficiency</a>
-            <ul>
-              <li><a href="#allowancetransfer-batch" class="web-link">AllowanceTransfer Batch</a></li>
-              <li><a href="#signaturetransfer-batch" class="web-link">SignatureTransfer Batch</a></li>
-            </ul>
-          </li>
-          <li><a href="#permit2s-eip-712-domain-setup" class="web-link">Permit2’s EIP-712 Domain Setup</a></li>
-          <li>
-<a href="#security-considerations-and-error-handling" class="web-link">Security Considerations and Error Handling</a>
-            <ul>
-              <li><a href="#time-based-protections" class="web-link">Time-based Protections</a></li>
-              <li><a href="#amount-validations" class="web-link">Amount Validations</a></li>
-              <li><a href="#nonce-based-replay-protection" class="web-link">Nonce-based Replay Protection</a></li>
-            </ul>
-          </li>
-          <li><a href="#emergency-features" class="web-link">Emergency Features</a></li>
-          <li>
-<a href="#gas-efficiency-benefits" class="web-link">Gas Efficiency Benefits</a>
-            <ul>
-              <li><a href="#traditional-approach-vs-permit2" class="web-link">Traditional Approach vs Permit2</a></li>
-              <li><a href="#permit2-approach" class="web-link">Permit2 Approach</a></li>
-              <li><a href="#batch-operations-provide-maximum-efficiency" class="web-link">Batch Operations Provide Maximum Efficiency</a></li>
-            </ul>
-          </li>
-          <li><a href="#integration-example-complete-bug-bounty-flow" class="web-link">Integration Example: Complete Bug Bounty Flow</a></li>
-          <li><a href="#choosing-between-allowancetransfer-and-signaturetransfer" class="web-link">Choosing Between AllowanceTransfer and SignatureTransfer</a></li>
-          <li><a href="#best-practices-for-bug-bounty-platforms" class="web-link">Best Practices for Bug Bounty Platforms</a></li>
-        </ul>
-      </li>
-      <li>
-<a href="#permit2-witness-transfers-adding-custom-logic" class="web-link">Permit2 Witness Transfers: Adding Custom Logic</a>
-        <ul>
-          <li><a href="#what-are-witness-transfers" class="web-link">What are Witness Transfers?</a></li>
-          <li><a href="#the-problem-witness-transfers-solve" class="web-link">The Problem Witness Transfers Solve</a></li>
-          <li><a href="#witness-transfer-fundamentals" class="web-link">Witness Transfer Fundamentals</a></li>
-          <li><a href="#basic-witness-implementation-vulnerability-verification" class="web-link">Basic Witness Implementation: Vulnerability Verification</a></li>
-          <li><a href="#witness-type-string-the-critical-component" class="web-link">Witness Type String: The Critical Component</a></li>
-          <li><a href="#advanced-witness-nested-structs" class="web-link">Advanced Witness: Nested Structs</a></li>
-          <li><a href="#dynamic-data-witness-including-custom-instructions" class="web-link">Dynamic Data Witness: Including Custom Instructions</a></li>
-          <li><a href="#array-witness-batch-vulnerability-processing" class="web-link">Array Witness: Batch Vulnerability Processing</a></li>
-          <li><a href="#complete-signature-generation-for-witnesses" class="web-link">Complete Signature Generation for Witnesses</a></li>
-          <li><a href="#witness-vs-non-witness-when-to-use-each" class="web-link">Witness vs Non-Witness: When to Use Each</a></li>
-          <li><a href="#security-considerations-for-witness-transfers" class="web-link">Security Considerations for Witness Transfers</a></li>
-          <li><a href="#advanced-patterns-conditional-logic" class="web-link">Advanced Patterns: Conditional Logic</a></li>
-          <li><a href="#best-practices-for-witness-transfers" class="web-link">Best Practices for Witness Transfers</a></li>
-        </ul>
-      </li>
-      <li>
-<a href="#conclusion" class="web-link">Conclusion</a>
-        <ul>
-          <li><a href="#what-youve-learned" class="web-link">What You’ve Learned</a></li>
-          <li><a href="#the-bug-bounty-platform-a-complete-example" class="web-link">The Bug Bounty Platform: A Complete Example</a></li>
-          <li><a href="#key-architectural-decisions" class="web-link">Key Architectural Decisions</a></li>
-          <li><a href="#getting-started" class="web-link">Getting Started</a></li>
-          <li><a href="#resources-for-continued-learning" class="web-link">Resources for Continued Learning</a></li>
-          <li><a href="#final-thoughts" class="web-link">Final Thoughts</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<hr>
 
 <h2 id="understanding-eip-712-making-signatures-human-readable">Understanding EIP-712: Making Signatures Human-Readable</h2>
 
@@ -2244,8 +2096,8 @@ Witness Permit:  PermitWitnessTransferFrom(TokenPermissions, spender, nonce, dea
 </article>  
 <div class="prev-next">
     
-<a class="prev" href="/articles/table-test"> << Table test</a>
 
+<a class="next" href="/articles/exocore-executive-summary">The Exocore Package >> </a>
 
 </div>
 
